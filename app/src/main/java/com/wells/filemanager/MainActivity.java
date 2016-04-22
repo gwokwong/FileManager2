@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sdAbsolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
             sdFile = new File(sdAbsolutePath);
             FileUtils.deleteEmptyDirectory(sdFile);
-            Log.v("deleteFile", "deleteCount->" + FileUtils.deleteCount);
         }
     }
 

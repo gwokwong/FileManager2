@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class FileUtils {
 
+    static {
+        exCount  = 0;
+        deleteCount = 0;
+    }
+
     /**执行次数*/
     private static int exCount  = 0;
     /**删除次数*/
