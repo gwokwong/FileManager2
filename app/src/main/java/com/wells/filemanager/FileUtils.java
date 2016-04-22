@@ -76,7 +76,7 @@ public class FileUtils {
         return  Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? true : false;
     }
 
-    public static List<File> getGreaterFileLists(int size){
+    public static List<File> getGreaterSizeFiles(int size){
        List<File> list = new ArrayList<File>();
         return  list;
     }
