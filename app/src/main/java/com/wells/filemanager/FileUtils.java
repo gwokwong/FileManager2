@@ -4,7 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.FileInputStream;
 import java.util.List;
 
 /**
@@ -12,35 +12,23 @@ import java.util.List;
  */
 public class FileUtils {
 
-    static {
-        exCount  = 0;
-        deleteCount = 0;
-    }
-
-    /**执行次数*/
-    private static int exCount  = 0;
-    /**删除次数*/
-    public static int deleteCount = 0;
-
     /**
      * 删除目录下所有空文件夹
+     *
      * @param file
      */
-    public static void deleteEmptyDirectory(File file){
-        exCount++;
-        Log.v("deleteFile","执行了->"+exCount+"次");
+    public static void deleteEmptyDirectory(File file) {
         try {
             if (file == null) {
                 return;
             }
-            if(file.exists()){
-                if(file.isDirectory()){
+            if (file.exists()) {
+                if (file.isDirectory()) {
                     File files[] = file.listFiles();
-                    if(files.length==0){
+                    if (files.length == 0) {
                         file.delete();  //如果是空文件直接删除
-                        deleteCount++;
                         deleteParentDir(file);
-                    }else {
+                    } else {
                         for (int i = 0; i < files.length; i++) {
                             deleteEmptyDirectory(files[i]);  //循环删除子目录
                         }
@@ -54,15 +42,15 @@ public class FileUtils {
     }
 
     /**
-     * 如果当期目录的父目录为空目录则删除
+     * 如果父目录为空目录则删除
+     *
      * @param file
      */
-    public static void deleteParentDir(File file){
+    public static void deleteParentDir(File file) {
         File parentFile = file.getParentFile();
-        if(parentFile.isDirectory()){
-            if(parentFile.listFiles().length==0){
+        if (parentFile.isDirectory()) {
+            if (parentFile.listFiles().length == 0) {
                 parentFile.delete();
-                deleteCount++;
                 deleteParentDir(parentFile);
             }
         }
@@ -70,15 +58,58 @@ public class FileUtils {
 
     /**
      * 监测SD卡是否存在
+     *
      * @return
      */
-    public static boolean isSDAvailable(){
-        return  Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? true : false;
+    public static boolean isSDAvailable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? true : false;
     }
 
-    public static List<File> getGreaterSizeFiles(int size){
-       List<File> list = new ArrayList<File>();
-        return  list;
+    /**
+     * 将大于size的文件加入files中
+     * @param files
+     * @param file
+     * @param size
+     */
+    public static void getGreaterSizeFiles(List<File> files, File file, int size) {
+        if (file == null || files == null) {
+            return;
+        }
+
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                File fileList[] = file.listFiles();
+                if (fileList.length != 0) {
+                    for (int i = 0; i < fileList.length; i++) {
+                        if (getFileSize(fileList[i]) > size) {
+                            files.add(fileList[i]);
+                        }
+                    }
+                }
+            } else {
+                if (getFileSize(file) > size) {
+                    files.add(file);
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取文件大小
+     * @param file
+     * @return
+     */
+    public static long getFileSize(File file) {
+        long size = 0;
+        try {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        } catch (Exception e) {
+            e.printStackTrace();
+            size = 0;
+        }
+        return size;
     }
 
 }
