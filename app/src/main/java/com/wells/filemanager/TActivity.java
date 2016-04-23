@@ -27,14 +27,14 @@ public abstract class TActivity extends AppCompatActivity {
     }
 
     public void setTitle(int resId,boolean isDisplayHomeAsUpEnabled){
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar)this.findViewById(R.id.toolbar);
         if(null!=toolbar){
             toolbar.setTitle(resId);
             toolbar.setTitleTextColor(Color.WHITE);
             setSupportActionBar(toolbar);
-            if(isDisplayHomeAsUpEnabled){
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+//            if(isDisplayHomeAsUpEnabled){
+//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            }
         }
     }
 
