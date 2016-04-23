@@ -1,4 +1,4 @@
-package com.wells.filemanager;
+package com.wells.filemanager.feedback;
 
 import cn.bmob.v3.BmobObject;
 
