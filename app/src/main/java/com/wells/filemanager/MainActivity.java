@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.wells.filemanager.common.util.FileUtils;
+
 import java.io.File;
 
 /**
