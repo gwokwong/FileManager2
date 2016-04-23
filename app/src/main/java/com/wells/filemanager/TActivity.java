@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 /**
- * Created by wei on 16/4/23.
+ * Created by wells on 16/4/23.
  */
 public abstract class TActivity extends AppCompatActivity {
     protected Handler handler;

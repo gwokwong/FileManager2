@@ -1,7 +1,7 @@
 package com.wells.filemanager;
 
 /**
- * Created by wei on 16/4/23.
+ * Created by wells on 16/4/23.
  */
 public class Config {
 
