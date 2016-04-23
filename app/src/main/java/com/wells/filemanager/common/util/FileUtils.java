@@ -1,4 +1,4 @@
-package com.wells.filemanager;
+package com.wells.filemanager.common.util;
 
 import android.os.Environment;
 import android.util.Log;
@@ -11,6 +11,11 @@ import java.util.List;
  * Created by wells on 16/4/22.
  */
 public class FileUtils {
+
+    public static final int TYPE_B = 1;  // 以B为单位
+    public static final int TYPE_KB = 2; // 以KB为单位
+    public static final int TYPE_MB = 3; // 以MB为单位
+    public static final int TYPE_GB = 4; // 以GB为单位
 
     /**
      * 删除目录下所有空文件夹
@@ -71,7 +76,7 @@ public class FileUtils {
      * @param file
      * @param size
      */
-    public static void getGreaterSizeFiles(List<File> files, File file, int size) {
+    public static void getGreaterSizeFiles(List<File> files, File file, int size,int sizeType) {
         if (file == null || files == null) {
             return;
         }
@@ -81,13 +86,13 @@ public class FileUtils {
                 File fileList[] = file.listFiles();
                 if (fileList.length != 0) {
                     for (int i = 0; i < fileList.length; i++) {
-                        if (getFileSize(fileList[i]) > size) {
+                        if (getFileSize(fileList[i],sizeType) > size) {
                             files.add(fileList[i]);
                         }
                     }
                 }
             } else {
-                if (getFileSize(file) > size) {
+                if (getFileSize(file,sizeType) > size) {
                     files.add(file);
                 }
             }
@@ -99,7 +104,7 @@ public class FileUtils {
      * @param file
      * @return
      */
-    public static long getFileSize(File file) {
+    public static long getFileSize(File file,int sizeType) {
         long size = 0;
         try {
             FileInputStream fis = null;
