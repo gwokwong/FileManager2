@@ -24,8 +24,13 @@ public class MainActivity extends AppCompatActivity  {
 
     public void menuClick(View view){
         switch (view.getId()){
-            case R.id.deleteBtn:
+            case R.id.deleteEmptyDirBtn:  //删除空目录
                 deleteSDEmptyDirectory();
+                break;
+            case R.id.feedbackBtn: //意见反馈
+
+                break;
+            case R.id.bigFileBtn: //大文件查找
                 break;
             default:
                 break;
