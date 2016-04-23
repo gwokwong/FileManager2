@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">FileManager</string>
+
+    <string name="app_name">强迫症Finder</string>
+
+    <!--main-->
+    <string name="feedback">意见反馈</string>
+
+
+    <!-- feedback-->
+    <string name="submit">提交</string>
+    <string name="your_name">您的称呼</string>
+    <string name="your_name_hint">请输入您的称呼</string>
+    <string name="suggestion">建议或意见</string>
+    <string name="suggestion_hint">请在此处输入您的建议或意见</string>
+    <string name="call_type">联系方式</string>
+    <string name="qq">QQ</string>
+    <string name="email">Email</string>
+    <string name="phone">手机</string>
+    <string name="wechat">微信</string>
+    <string name="call_num_hint">请输入您的联系号码</string>
+
+
+
 </resources>

@@ -1,27 +1,38 @@
 package com.wells.filemanager;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.wells.filemanager.common.util.FileUtils;
+import com.wells.filemanager.feedback.FeedbackActivity;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wells on 16/4/21.
  */
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends TActivity {
 
     private String sdAbsolutePath;
     private File sdFile;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTitle(R.string.app_name,false);
+
     }
 
     public void menuClick(View view){
@@ -30,9 +41,13 @@ public class MainActivity extends AppCompatActivity  {
                 deleteSDEmptyDirectory();
                 break;
             case R.id.feedbackBtn: //意见反馈
+                startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
 
                 break;
             case R.id.bigFileBtn: //大文件查找
+                List<File> list = new ArrayList<File>();
+                FileUtils.getGreaterSizeFiles(list,new File(Environment.getExternalStorageDirectory().getAbsolutePath()),100,FileUtils.TYPE_MB);
+                Toast.makeText(MainActivity.this,"file length is "+list.size(),Toast.LENGTH_LONG).show();
                 break;
             default:
                 break;
