@@ -16,7 +16,7 @@
         android:layout_marginBottom="10dp"
         android:onClick="menuClick"
         android:padding="10dp"
-        android:text="大文件管理" />
+        android:text="@string/bigFile" />
 
     <Button
         android:id="@+id/deleteEmptyDirBtn"
@@ -26,7 +26,7 @@
         android:layout_centerVertical="true"
         android:onClick="menuClick"
         android:padding="10dp"
-        android:text="一键删除空目录" />
+        android:text="@string/delete_empty_dir" />
 
     <Button
         android:id="@+id/feedbackBtn"
@@ -37,5 +37,5 @@
         android:layout_marginTop="10dp"
         android:onClick="menuClick"
         android:padding="10dp"
-        android:text="意见反馈" />
+        android:text="@string/feedback" />
 </RelativeLayout>
