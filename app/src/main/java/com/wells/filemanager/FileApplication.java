@@ -13,6 +13,5 @@ public class FileApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Bmob.initialize(getApplicationContext(),Config.BMOB_KEY);
-
     }
 }
