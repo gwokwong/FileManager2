@@ -1,10 +1,12 @@
 package com.wells.filemanager;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 /**
@@ -46,5 +48,41 @@ public class TActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 延时弹出键盘
+     *
+     * @param focus 键盘的焦点项
+     */
+    protected void showKeyboardDelayed(View focus) {
+        final View viewToFocus = focus;
+        if (focus != null) {
+            focus.requestFocus();
+        }
+
+        getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (viewToFocus == null || viewToFocus.isFocused()) {
+                    showKeyboard(true);
+                }
+            }
+        }, 200);
+    }
+
+    protected void showKeyboard(boolean isShow) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (isShow) {
+            if (getCurrentFocus() == null) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+            } else {
+                imm.showSoftInput(getCurrentFocus(), 0);
+            }
+        } else {
+            if (getCurrentFocus() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
     }
 }
