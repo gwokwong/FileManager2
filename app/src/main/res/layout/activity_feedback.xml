@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/name_tv"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -29,6 +30,7 @@
     <EditText
         android:id="@+id/feedback_name"
         android:layout_width="wrap_content"
+        style="@style/body_text"
         android:layout_height="wrap_content"
         android:layout_below="@+id/common_head"
         android:layout_toRightOf="@+id/name_tv"
@@ -84,6 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/feedback_call_type_rg"
+        style="@style/body_text"
         android:hint="@string/call_num_hint" />
 
     <EditText
@@ -92,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/feedback_call_num"
         android:layout_marginTop="10dp"
+        style="@style/body_text"
         android:gravity="left|top"
         android:hint="@string/suggestion_hint"
         android:minLines="5"
