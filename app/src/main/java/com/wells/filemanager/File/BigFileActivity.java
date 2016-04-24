@@ -14,7 +14,7 @@ public class BigFileActivity extends TActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bigfile);
-        setTitle(R.string.call_num_hint,false);
+        setTitle(R.string.bigFile,true);
 
     }
 }

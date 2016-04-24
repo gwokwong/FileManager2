@@ -30,17 +30,6 @@ public class FeedbackActivity extends TActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-
-
-//        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-//        if(null!=toolbar){
-//            toolbar.setTitle(R.string.feedback);
-//            toolbar.setTitleTextColor(Color.WHITE);
-//            setSupportActionBar(toolbar);
-////            if(isDisplayHomeAsUpEnabled){
-////                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-////            }
-//        }
         initViews();
         setTitle(R.string.feedback,true);
     }
