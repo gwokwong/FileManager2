@@ -38,6 +38,11 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".File.BigFileActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
