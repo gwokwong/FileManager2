@@ -56,6 +56,8 @@ public class FeedbackActivity extends TActivity {
         weChatRb = (RadioButton)findViewById(R.id.feedback_wechat);
         submitBtn = (Button)findViewById(R.id.feedback_submit);
 
+        showKeyboardDelayed(nameEt);
+
         calltypeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
