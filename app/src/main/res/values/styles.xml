@@ -14,4 +14,10 @@
 
 </style>
 
+    <style name="body_text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
 </resources>
