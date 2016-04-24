@@ -1,9 +1,7 @@
 package com.wells.filemanager.feedback;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +42,7 @@ public class FeedbackActivity extends TActivity {
 ////            }
 //        }
         initViews();
-        setTitle(R.string.feedback,false);
+        setTitle(R.string.feedback,true);
     }
 
     private void initViews(){

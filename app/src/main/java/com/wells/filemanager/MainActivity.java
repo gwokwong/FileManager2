@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
+import com.wells.filemanager.File.BigFileActivity;
 import com.wells.filemanager.common.util.FileUtils;
 import com.wells.filemanager.feedback.FeedbackActivity;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wells on 16/4/21.
@@ -28,7 +26,6 @@ public class MainActivity extends TActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setTitle(R.string.app_name,false);
 
     }
@@ -43,9 +40,11 @@ public class MainActivity extends TActivity {
 
                 break;
             case R.id.bigFileBtn: //大文件查找
-                List<File> list = new ArrayList<File>();
-                FileUtils.getGreaterSizeFiles(list,new File(Environment.getExternalStorageDirectory().getAbsolutePath()),100,FileUtils.TYPE_MB);
-                Toast.makeText(MainActivity.this,"file length is "+list.size(),Toast.LENGTH_LONG).show();
+//                List<File> list = new ArrayList<File>();
+//                FileUtils.getGreaterSizeFiles(list,new File(Environment.getExternalStorageDirectory().getAbsolutePath()),100,FileUtils.TYPE_MB);
+//                Toast.makeText(MainActivity.this,"file length is "+list.size(),Toast.LENGTH_LONG).show();
+
+                startActivity(new Intent(MainActivity.this, BigFileActivity.class));
                 break;
             default:
                 break;
