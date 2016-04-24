@@ -4,6 +4,8 @@
 
     <!--main-->
     <string name="feedback">意见反馈</string>
+    <string name="bigFile">大文件管理</string>
+    <string name="delete_empty_dir">一键删除空文件夹</string>
 
 
     <!-- feedback-->
