@@ -3,7 +3,7 @@ package com.wells.filemanager.feedback;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by wei on 16/4/23.
+ * Created by wells on 16/4/23.
  */
 public class Feedback extends BmobObject {
 
