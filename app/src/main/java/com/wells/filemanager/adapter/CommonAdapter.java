@@ -1,4 +1,4 @@
-package com.wells.filemanager;
+package com.wells.filemanager.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,8 +1,10 @@
-package com.wells.filemanager;
+package com.wells.filemanager.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.wells.filemanager.R;
 
 /**
  * Created by wells on 16/4/25.

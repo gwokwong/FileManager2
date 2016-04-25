@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.wells.filemanager.R;
-import com.wells.filemanager.TActivity;
+import com.wells.filemanager.activity.TActivity;
 import com.wells.filemanager.common.util.FileUtils;
 
 import java.io.File;

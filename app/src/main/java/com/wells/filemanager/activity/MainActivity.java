@@ -1,4 +1,4 @@
-package com.wells.filemanager;
+package com.wells.filemanager.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.wells.filemanager.File.BigFileActivity;
+import com.wells.filemanager.R;
 import com.wells.filemanager.common.util.FileUtils;
-import com.wells.filemanager.feedback.FeedbackActivity;
 
 import java.io.File;
 

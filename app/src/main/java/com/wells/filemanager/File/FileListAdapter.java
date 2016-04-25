@@ -4,9 +4,9 @@ import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.wells.filemanager.CommonAdapter;
 import com.wells.filemanager.R;
-import com.wells.filemanager.ViewHolder;
+import com.wells.filemanager.adapter.CommonAdapter;
+import com.wells.filemanager.adapter.ViewHolder;
 
 import java.io.File;
 import java.util.ArrayList;

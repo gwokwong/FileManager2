@@ -1,4 +1,4 @@
-package com.wells.filemanager;
+package com.wells.filemanager.activity;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.wells.filemanager.R;
 
 /**
  * Created by wells on 16/4/23.

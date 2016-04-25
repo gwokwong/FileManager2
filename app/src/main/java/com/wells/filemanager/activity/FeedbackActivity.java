@@ -1,4 +1,4 @@
-package com.wells.filemanager.feedback;
+package com.wells.filemanager.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.wells.filemanager.R;
-import com.wells.filemanager.TActivity;
+import com.wells.filemanager.bean.Feedback;
 
 import cn.bmob.v3.listener.SaveListener;
 
@@ -55,7 +55,7 @@ public class FeedbackActivity extends TActivity {
                 int radioButtonId = radioGroup.getCheckedRadioButtonId();
                 switch (radioButtonId){
                     case R.id.feedback_qq:
-                        callType =Feedback.CALL_TYPE_QQ;
+                        callType = Feedback.CALL_TYPE_QQ;
                         break;
                     case R.id.feedback_email:
                         callType =Feedback.CALL_TYPE_EMAIL;
