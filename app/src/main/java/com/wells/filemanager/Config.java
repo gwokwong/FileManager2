@@ -2,6 +2,8 @@ package com.wells.filemanager;
 
 /**
  * Created by wells on 16/4/23.
+ *
+ * 全局配置类
  */
 public class Config {
 

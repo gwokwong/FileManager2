@@ -73,11 +73,12 @@ public class FileUtils {
 
     /**
      * 将大于size的文件加入files中
+     *
      * @param files
      * @param file
      * @param size
      */
-    public static void getGreaterSizeFiles(List<File> files, File file, int size,int sizeType) {
+    public static void getGreaterSizeFiles(List<File> files, File file, int size, int sizeType) {
         if (file == null || files == null) {
             return;
         }
@@ -85,32 +86,33 @@ public class FileUtils {
         if (file.exists()) {
             if (file.isDirectory()) {
                 File fileList[] = file.listFiles();
-                if (fileList.length != 0) {
+                if (fileList != null && fileList.length != 0) {
                     for (int i = 0; i < fileList.length; i++) {
-                        getGreaterSizeFiles(files,fileList[i],size,sizeType);
+                        getGreaterSizeFiles(files, fileList[i], size, sizeType);
                     }
                 }
             } else {
-                if (getFileSize(file,sizeType) > size) {
+                if (getFileSize(file, sizeType) > size) {
                     files.add(file);
-                    Log.v("info","size-->"+files.size());
+                    Log.v("info", "size-->" + files.size());
                 }
             }
         }
-        Log.v("info","size length -->"+files.size());
+        Log.v("info", "size length -->" + files.size());
     }
 
     /**
      * 获取文件大小
+     *
      * @param file
      * @return
      */
-    public static double getFileSize(File file,int sizeType) {
+    public static double getFileSize(File file, int sizeType) {
         double size = 0;
         try {
             FileInputStream fis = null;
             fis = new FileInputStream(file);
-            size = FormetFileSize(fis.available(),sizeType);
+            size = FormetFileSize(fis.available(), sizeType);
         } catch (Exception e) {
             e.printStackTrace();
             size = 0;
@@ -120,6 +122,7 @@ public class FileUtils {
 
     /**
      * 转换文件大小
+     *
      * @param fileS
      * @return
      */
@@ -144,6 +147,7 @@ public class FileUtils {
 
     /**
      * 转换文件大小,指定转换的类型
+     *
      * @param fileS
      * @param sizeType
      * @return
@@ -171,7 +175,7 @@ public class FileUtils {
         return fileSizeLong;
     }
 
-    public static String getAutoFileOrFilesSize(String filePath){
+    public static String getAutoFileOrFilesSize(String filePath) {
         File file = new File(filePath);
         long blockSize = 0;
         try {
@@ -189,6 +193,7 @@ public class FileUtils {
 
     /**
      * 获取指定文件大小
+     *
      * @param file
      * @return
      * @throws Exception
@@ -205,8 +210,10 @@ public class FileUtils {
         }
         return size;
     }
+
     /**
      * 获取指定文件夹的文件大小
+     *
      * @param f
      * @return
      * @throws Exception

@@ -45,6 +45,8 @@ public class FeedbackActivity extends TActivity {
         weChatRb = (RadioButton)findViewById(R.id.feedback_wechat);
         submitBtn = (Button)findViewById(R.id.feedback_submit);
 
+        calltypeRg.check(QQRb.getId());
+
         showKeyboardDelayed(nameEt);
 
         calltypeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -89,6 +91,11 @@ public class FeedbackActivity extends TActivity {
                     @Override
                     public void onSuccess() {
                         toast("感谢您的提交,我们会尽快查看您的建议和意见");
+                        //清空操作 or add 延时退出当前界面
+                        nameEt.setText("");
+                        callNumEt.setText("");
+                        suggestionEt.setText("");
+                        calltypeRg.check(QQRb.getId());
                     }
 
                     @Override
@@ -100,10 +107,5 @@ public class FeedbackActivity extends TActivity {
 
             }
         });
-
-
-
-
-
     }
 }
