@@ -1,12 +1,10 @@
-package com.wells.filemanager.File;
+package com.wells.filemanager.adapter;
 
 import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.wells.filemanager.R;
-import com.wells.filemanager.adapter.CommonAdapter;
-import com.wells.filemanager.adapter.ViewHolder;
 
 import java.io.File;
 import java.util.ArrayList;

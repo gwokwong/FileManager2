@@ -1,4 +1,4 @@
-package com.wells.filemanager.File;
+package com.wells.filemanager.activity;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,8 +10,8 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.wells.filemanager.R;
-import com.wells.filemanager.activity.TActivity;
-import com.wells.filemanager.common.util.FileUtils;
+import com.wells.filemanager.adapter.FileListAdapter;
+import com.wells.filemanager.util.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;

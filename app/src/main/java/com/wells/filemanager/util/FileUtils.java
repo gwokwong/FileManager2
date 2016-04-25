@@ -1,4 +1,4 @@
-package com.wells.filemanager.common.util;
+package com.wells.filemanager.util;
 
 import android.os.Environment;
 import android.util.Log;

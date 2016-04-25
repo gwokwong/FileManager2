@@ -1,4 +1,4 @@
-package com.wells.filemanager.common.util;
+package com.wells.filemanager.util;
 
 /**
  * Created by wells on 16/4/23.
