@@ -45,7 +45,7 @@
 
         </activity>
 
-        <activity android:name=".File.BigFileActivity"
+        <activity android:name=".activity.BigFileActivity"
             android:screenOrientation="portrait">
 
         </activity>

@@ -3,6 +3,7 @@ package com.wells.filemanager.activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,7 +28,7 @@ public class BigFileActivity extends TActivity {
     private List<File> files = new ArrayList<File>();
 
     //默认设置超过100M为大文件
-    private int defaultBigFileSize = 3;
+    private int defaultBigFileSize = 2;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
     private FileListAdapter adapter;
@@ -45,8 +46,12 @@ public class BigFileActivity extends TActivity {
         FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
         adapter = new FileListAdapter(this, files, R.layout.item_list_file);
         fileListView.setAdapter(adapter);
+
+//        allCheckBox.performClick();
+
         allCheckBox.setChecked(true);
         adapter.setAllCheck(true);
+//        adapter.notifyDataSetChanged();
     }
 
     private void initViews() {
@@ -57,11 +62,13 @@ public class BigFileActivity extends TActivity {
         allCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                Log.v("info","checked status " +checked);
                 if (checked) {
                     adapter.setAllCheck(true);
                 } else {
                     adapter.setAllCheck(false);
                 }
+//                adapter.notifyDataSetChanged();
             }
         });
 
@@ -74,6 +81,7 @@ public class BigFileActivity extends TActivity {
                     }
                 }
                 toast("删除成功!");
+                adapter.setDatas(new ArrayList<File>());
             }
         });
 

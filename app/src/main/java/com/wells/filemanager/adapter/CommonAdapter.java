@@ -26,6 +26,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
             mDatas.clear();
         }
         this.mDatas = datas;
+        notifyDataSetChanged();
     }
 
     public CommonAdapter(Context context, List<T> datas, int layoutId) {
