@@ -3,7 +3,6 @@ package com.wells.filemanager.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.wells.filemanager.R;
@@ -19,7 +18,6 @@ public class MainActivity extends TActivity {
 
     private String sdAbsolutePath;
     private File sdFile;
-    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +34,8 @@ public class MainActivity extends TActivity {
                 break;
             case R.id.feedbackBtn: //意见反馈
                 startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
-
                 break;
             case R.id.bigFileBtn: //大文件查找
-//                List<File> list = new ArrayList<File>();
-//                FileUtils.getGreaterSizeFiles(list,new File(Environment.getExternalStorageDirectory().getAbsolutePath()),100,FileUtils.TYPE_MB);
-//                Toast.makeText(MainActivity.this,"file length is "+list.size(),Toast.LENGTH_LONG).show();
-
                 startActivity(new Intent(MainActivity.this, BigFileActivity.class));
                 break;
             default:

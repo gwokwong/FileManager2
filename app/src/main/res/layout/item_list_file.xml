@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
     <TextView
         android:id="@+id/item_file_name"
@@ -13,14 +15,15 @@
         android:layout_marginLeft="15dp"
         android:text="@string/app_name" />
 
-    <CheckBox
-        android:id="@+id/item_file_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/item_file_image"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
         android:layout_centerVertical="true"
-        android:checked="true"
-        android:text="" />
+        android:layout_marginRight="15dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:background="@mipmap/chexkbox_normal" />
 
 </RelativeLayout>

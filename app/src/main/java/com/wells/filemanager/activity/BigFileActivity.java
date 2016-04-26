@@ -28,7 +28,7 @@ public class BigFileActivity extends TActivity {
     private List<File> files = new ArrayList<File>();
 
     //默认设置超过100M为大文件
-    private int defaultBigFileSize = 2;
+    private int defaultBigFileSize = 10;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
     private FileListAdapter adapter;
@@ -47,11 +47,11 @@ public class BigFileActivity extends TActivity {
         adapter = new FileListAdapter(this, files, R.layout.item_list_file);
         fileListView.setAdapter(adapter);
 
-//        allCheckBox.performClick();
 
         allCheckBox.setChecked(true);
         adapter.setAllCheck(true);
-//        adapter.notifyDataSetChanged();
+//        allCheckBox.performClick();
+
     }
 
     private void initViews() {
@@ -68,14 +68,16 @@ public class BigFileActivity extends TActivity {
                 } else {
                     adapter.setAllCheck(false);
                 }
-//                adapter.notifyDataSetChanged();
             }
         });
+
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (File file : files) {
+
+                List<File> checkFiles = adapter.getCheckFiles();
+                for (File file : checkFiles) {
                     if(file.exists()){
                         file.delete();
                     }
