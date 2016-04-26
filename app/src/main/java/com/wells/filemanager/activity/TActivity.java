@@ -1,12 +1,15 @@
 package com.wells.filemanager.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wells.filemanager.R;
@@ -87,4 +90,32 @@ public class TActivity extends AppCompatActivity {
             }
         }
     }
+
+    public static TextView addRightClickableTextViewOnToolBar(Activity activity, String text) {
+        View toolbarView = activity.findViewById(R.id.common_head);
+        Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
+        if (null != toolbarView && null != toolbar) {
+            View view = LayoutInflater.from(activity).inflate(R.layout.nim_action_bar_right_clickable_tv, null);
+            TextView textView = (TextView) view.findViewById(R.id.action_bar_right_clickable_textview);
+            textView.setText(text);
+            return textView;
+        }
+
+        return null;
+
+
+//        ActionBar actionBar = activity.getSupportActionBar();
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayShowTitleEnabled(true);
+//
+//        View view = LayoutInflater.from(activity).inflate(R.layout.nim_action_bar_right_clickable_tv, null);
+//        TextView textView = (TextView) view.findViewById(R.id.action_bar_right_clickable_textview);
+//        textView.setText(text);
+//        toolbar.setCu
+//        actionBar.setCustomView(view, new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT | Gravity.CENTER));
+//        return textView;
+    }
+
+
 }
