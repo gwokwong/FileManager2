@@ -3,8 +3,11 @@ package com.wells.filemanager.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.wells.filemanager.R;
 import com.wells.filemanager.util.FileUtils;
@@ -15,7 +18,7 @@ import java.io.File;
  * Created by wells on 16/4/21.
  */
 
-public class MainActivity extends TActivity implements View.OnClickListener {
+public class MainActivity extends TActivity implements View.OnClickListener,Toolbar.OnMenuItemClickListener {
 
     private String sdAbsolutePath;
     private File sdFile;
@@ -28,6 +31,8 @@ public class MainActivity extends TActivity implements View.OnClickListener {
         setTitle(R.string.app_name,false);
 //        bigFileBtn = (Button)findViewById(R.id.bigFileBtn);
 //        bigFileBtn.setOnClickListener(this);
+
+        getToolbar().setOnMenuItemClickListener(this);
 
     }
 
@@ -65,6 +70,46 @@ public class MainActivity extends TActivity implements View.OnClickListener {
 //                startActivity(new Intent(MainActivity.this, BigFileActivity.class));
 //                break;
         }
-
     }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
+    }
+
+//    @Override
+//    public boolean onMenuOpened(int featureId, Menu menu) {
+//        setOverflowIconVisible(featureId, menu);
+//        return super.onMenuOpened(featureId, menu);
+//    }
+
+//    /**
+//     * 显示OverflowMenu的Icon
+//     *
+//     * @param featureId
+//     * @param menu
+//     */
+//    private void setOverflowIconVisible(int featureId, Menu menu) {
+//        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+//            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+//                try {
+//                    Method m = menu.getClass().getDeclaredMethod(
+//                            "setOptionalIconsVisible", Boolean.TYPE);
+//                    m.setAccessible(true);
+//                    m.invoke(menu, true);
+//                } catch (Exception e) {
+//                    Log.d("OverflowIconVisible", e.getMessage());
+//                }
+//            }
+//        }
+//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+
 }

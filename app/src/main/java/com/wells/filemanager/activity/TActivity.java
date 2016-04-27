@@ -39,8 +39,15 @@ public class TActivity extends AppCompatActivity {
 //                toolbar.setNavigationIcon(R.mipmap.back);
             }
         }
-
     }
+
+    protected Toolbar getToolbar(){
+        View toolbarView = findViewById(R.id.common_head);
+        Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
+        return toolbar;
+    }
+
+
 
     protected void toast(CharSequence msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
