@@ -128,10 +128,7 @@ public class BigFileActivity extends TActivity {
         //设置ProgressDialog 的进度条是否不明确
         loadingDialog.setCancelable(true);
         //设置ProgressDialog 是否可以按退回按键取消
-
-
     }
-
 
     private Runnable deleteRun = new Runnable() {
         @Override
