@@ -109,13 +109,20 @@ public class FileUtils {
      */
     public static double getFileSize(File file, int sizeType) {
         double size = 0;
+        FileInputStream fis = null;
         try {
-            FileInputStream fis = null;
-            fis = new FileInputStream(file);
-            size = FormetFileSize(fis.available(), sizeType);
+                fis = new FileInputStream(file);
+                size = FormetFileSize(fis.available(), sizeType);
         } catch (Exception e) {
             e.printStackTrace();
             size = 0;
+        } finally {
+            try {
+                fis.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
         return size;
     }
