@@ -140,6 +140,7 @@ public class BigFileActivity extends TActivity {
                 }
             }
             handler.sendEmptyMessage(DELETE);
+
         }
     };
 
@@ -147,7 +148,8 @@ public class BigFileActivity extends TActivity {
         @Override
         public void run() {
             FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
-            handler.sendEmptyMessage(SEARCH);
+//            handler.sendEmptyMessage(SEARCH);
+            handler.sendEmptyMessageDelayed(SEARCH,300);
         }
     };
 
