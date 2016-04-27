@@ -24,6 +24,6 @@
         android:layout_marginRight="15dp"
         android:focusable="false"
         android:clickable="true"
-        android:background="@mipmap/chexkbox_normal" />
+        android:background="@mipmap/chexkbox_pressed" />
 
 </RelativeLayout>

@@ -14,7 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/common_head"
         android:layout_marginRight="15dp"
-        android:checked="true"
+        android:checked="false"
         android:text="全选" />
 
     <ListView

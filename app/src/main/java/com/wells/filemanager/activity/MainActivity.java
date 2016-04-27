@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 
 import com.wells.filemanager.R;
 import com.wells.filemanager.util.FileUtils;
@@ -14,16 +15,19 @@ import java.io.File;
  * Created by wells on 16/4/21.
  */
 
-public class MainActivity extends TActivity {
+public class MainActivity extends TActivity implements View.OnClickListener {
 
     private String sdAbsolutePath;
     private File sdFile;
+//    private Button bigFileBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name,false);
+//        bigFileBtn = (Button)findViewById(R.id.bigFileBtn);
+//        bigFileBtn.setOnClickListener(this);
 
     }
 
@@ -52,5 +56,15 @@ public class MainActivity extends TActivity {
             sdFile = new File(sdAbsolutePath);
             FileUtils.deleteEmptyDirectory(sdFile);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+//            case R.id.bigFileBtn:
+//                startActivity(new Intent(MainActivity.this, BigFileActivity.class));
+//                break;
+        }
+
     }
 }

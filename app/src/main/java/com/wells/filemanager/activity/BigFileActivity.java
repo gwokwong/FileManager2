@@ -1,7 +1,11 @@
 package com.wells.filemanager.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +37,35 @@ public class BigFileActivity extends TActivity {
 
     private FileListAdapter adapter;
 
+    private static final int SEARCH = 10001;
+    private static final int DELETE = 10002;
+
+    private ProgressDialog loadingDialog = null;
+
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case SEARCH:
+                    if(loadingDialog!=null){
+                        loadingDialog.dismiss();
+                    }
+                    adapter.setAllCheck(true);
+                    allCheckBox.setChecked(true);
+//                    adapter.notifyDataSetChanged();
+                    break;
+                case DELETE:
+                    toast("删除成功!");
+                    adapter.setDatas(new ArrayList<File>());
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +74,11 @@ public class BigFileActivity extends TActivity {
         initViews();
         initData();
     }
-
     private void initData() {
-        FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
         adapter = new FileListAdapter(this, files, R.layout.item_list_file);
         fileListView.setAdapter(adapter);
-
-
-        allCheckBox.setChecked(true);
-        adapter.setAllCheck(true);
-//        allCheckBox.performClick();
+        loadingDialog.show();
+        searchThread.start();
 
     }
 
@@ -75,17 +103,62 @@ public class BigFileActivity extends TActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                List<File> checkFiles = adapter.getCheckFiles();
-                for (File file : checkFiles) {
-                    if(file.exists()){
-                        file.delete();
-                    }
-                }
-                toast("删除成功!");
-                adapter.setDatas(new ArrayList<File>());
+                new Thread(deleteRun).start();
             }
         });
 
+        loadingDialog = new ProgressDialog(this);
+        //实例化
+        loadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //设置进度条风格，风格为圆形，旋转的
+        loadingDialog.setTitle("Google");
+        //设置ProgressDialog 标题
+        loadingDialog.setMessage("文件查找中...");
+        //设置ProgressDialog 提示信息
+        loadingDialog.setIcon(R.mipmap.ic_launcher);
+        //设置ProgressDialog 标题图标
+        loadingDialog.setButton("Cancle", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        //设置ProgressDialog 的一个Button
+        loadingDialog.setIndeterminate(false);
+        //设置ProgressDialog 的进度条是否不明确
+        loadingDialog.setCancelable(true);
+        //设置ProgressDialog 是否可以按退回按键取消
+
+
+    }
+
+
+    private Runnable deleteRun = new Runnable() {
+        @Override
+        public void run() {
+            List<File> checkFiles = adapter.getCheckFiles();
+            for (File file : checkFiles) {
+                if(file.exists()){
+                    file.delete();
+                }
+            }
+            handler.sendEmptyMessage(DELETE);
+        }
+    };
+
+    private Thread searchThread = new Thread(){
+        @Override
+        public void run() {
+            FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
+            handler.sendEmptyMessage(SEARCH);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deleteRun =null;
+        searchThread = null;
+        loadingDialog = null;
     }
 }
