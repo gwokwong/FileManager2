@@ -8,98 +8,51 @@
         layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/name_tv"
-
-        android:layout_width="wrap_content"
+        android:id="@+id/begin_tv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/common_head"
-        android:text="@string/your_name" />
+        android:layout_margin="10dp"
+        android:text="@string/feedback_begin"
+        android:textColor="@color/body_text"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/feedback_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/begin_tv"
+        android:layout_margin="10dp" />
+
+
+    <EditText
+        android:id="@+id/feedback_suggestion"
+        style="@style/body_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedback_theme"
+        android:layout_margin="10dp"
+        android:gravity="left|top"
+        android:hint="@string/suggestion_hint"
+        android:minLines="5"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggestion_last_tips"
+        android:layout_below="@+id/feedback_suggestion"
+        android:layout_margin="10dp"
+        android:textSize="14sp"
+        android:text="@string/suggestion_tips"/>
 
     <Button
         android:id="@+id/feedback_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/suggestion_last_tips"
         android:layout_margin="10dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/submit" />
-
-    <EditText
-        android:id="@+id/feedback_name"
-        android:layout_width="wrap_content"
-        style="@style/body_text"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/common_head"
-        android:layout_toRightOf="@+id/name_tv"
-        android:hint="@string/your_name_hint" />
-
-
-    <TextView
-        android:id="@+id/call_type_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_tv"
-        android:layout_marginTop="20dp"
-        android:text="@string/call_type" />
-
-    <RadioGroup
-        android:id="@+id/feedback_call_type_rg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/call_type_tv"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/feedback_qq"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/qq" />
-
-        <RadioButton
-            android:id="@+id/feedback_email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/email" />
-
-        <RadioButton
-            android:id="@+id/feedback_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/phone" />
-
-        <RadioButton
-            android:id="@+id/feedback_wechat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/wechat" />
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/feedback_call_num"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/feedback_call_type_rg"
-        style="@style/body_text"
-        android:hint="@string/call_num_hint" />
-
-    <EditText
-        android:id="@+id/feedback_suggestion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/feedback_call_num"
-        android:layout_marginTop="10dp"
-        style="@style/body_text"
-        android:gravity="left|top"
-        android:hint="@string/suggestion_hint"
-        android:minLines="5"
-        android:padding="5dp" />
+        android:text="@string/question_submit" />
 
 
 </RelativeLayout>

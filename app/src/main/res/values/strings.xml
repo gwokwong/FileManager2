@@ -9,18 +9,10 @@
 
 
     <!-- feedback-->
-    <string name="submit">提交</string>
-    <string name="your_name">您的称呼</string>
-    <string name="your_name_hint">请输入您的称呼</string>
-    <string name="suggestion">建议或意见</string>
-    <string name="suggestion_hint">请在此处输入您的建议或意见</string>
-    <string name="call_type">联系方式</string>
-    <string name="qq">QQ</string>
-    <string name="email">Email</string>
-    <string name="phone">手机</string>
-    <string name="wechat">微信</string>
-    <string name="call_num_hint">请输入您的联系号码</string>
-
+    <string name="suggestion_hint">您的宝贵意见是我们进步的源泉</string>
+    <string name="question_submit">问题提交</string>
+    <string name="feedback_begin">您有什么问题或者建议想对我们说？</string>
+    <string name="suggestion_tips">请详细描述您遇到的问题，有助于我们快速定位并解决问题，或留下您宝贵的建议或者意见，我们会认真进行评估！</string>
 
 
 </resources>

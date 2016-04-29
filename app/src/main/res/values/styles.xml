@@ -8,7 +8,7 @@
        <!-- <item name="colorAccent">@color/colorAccent</item>-->
 
         <item name="colorAccent">#ff0000</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
         <!-- unused overflow展开的样式 -->
@@ -33,6 +33,11 @@
         <item name="android:popupBackground">?attr/colorPrimary</item>
         <item name="android:dropDownVerticalOffset">9dp</item>
         <item name="android:dropDownHorizontalOffset">0dip</item>
+    </style>
+
+    <style name="menu_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
