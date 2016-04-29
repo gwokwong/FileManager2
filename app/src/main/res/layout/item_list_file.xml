@@ -13,7 +13,9 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        android:layout_toLeftOf="@+id/item_file_size"
+        android:layout_toStartOf="@+id/item_file_size" />
 
     <Button
         android:id="@+id/item_file_image"
@@ -23,7 +25,17 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
         android:focusable="false"
+        android:layout_marginLeft="10dp"
         android:clickable="true"
         android:background="@mipmap/chexkbox_pressed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/item_file_size"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/item_file_image"
+        android:layout_toStartOf="@+id/item_file_image" />
 
 </RelativeLayout>

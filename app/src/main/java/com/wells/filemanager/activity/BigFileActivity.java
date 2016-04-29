@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.wells.filemanager.R;
 import com.wells.filemanager.adapter.FileListAdapter;
@@ -28,9 +30,10 @@ public class BigFileActivity extends TActivity {
     private CheckBox allCheckBox;
     private Button confirmBtn;
     private List<File> files = new ArrayList<File>();
+    private TextView countTv;
 
-    //默认设置超过100M为大文件
-    private int defaultBigFileSize = 100;
+    //默认设置超过500M为大文件
+    private int defaultBigFileSize = 500;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
     private FileListAdapter adapter;
@@ -47,6 +50,10 @@ public class BigFileActivity extends TActivity {
                     adapter.setAllCheck(true);
                     allCheckBox.setChecked(true);
 //                    adapter.notifyDataSetChanged();
+
+                    //更新文本
+                    String text = String.format(getResources().getString(R.string.count_check),adapter.getCount());
+                    countTv.setText(text);
                     break;
                 case DELETE:
                     toast("删除成功!");
@@ -109,6 +116,16 @@ public class BigFileActivity extends TActivity {
                 startScanSD();
             }
         });
+        fileListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                File file = adapter.getItem(pos);
+                FileUtils.openFile(BigFileActivity.this,file);
+                return false;
+            }
+        });
+
+        countTv = (TextView)findViewById(R.id.bigfile_count_check);
     }
 
     private Runnable deleteRun = new Runnable() {
@@ -140,4 +157,6 @@ public class BigFileActivity extends TActivity {
         deleteRun = null;
         searchRun = null;
     }
+
+
 }

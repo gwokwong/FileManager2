@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.wells.filemanager.R;
+import com.wells.filemanager.util.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class FileListAdapter extends CommonAdapter<File> {
     @Override
     public void convert(final ViewHolder holder, File file) {
         holder.setText(R.id.item_file_name, file.getName());
+        holder.setText(R.id.item_file_size, FileUtils.getAutoFileOrFilesSize(file.getAbsolutePath()));
 
         Button checked = holder.getView(R.id.item_file_image);
         if (mPos.contains(holder.getPosition())) {
