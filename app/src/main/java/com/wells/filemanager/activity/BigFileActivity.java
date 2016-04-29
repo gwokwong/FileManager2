@@ -1,13 +1,10 @@
 package com.wells.filemanager.activity;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +14,7 @@ import android.widget.ListView;
 import com.wells.filemanager.R;
 import com.wells.filemanager.adapter.FileListAdapter;
 import com.wells.filemanager.util.FileUtils;
+import com.wells.filemanager.widget.ProgressWheelDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class BigFileActivity extends TActivity {
     private List<File> files = new ArrayList<File>();
 
     //默认设置超过100M为大文件
-    private int defaultBigFileSize = 10;
+    private int defaultBigFileSize = 100;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
     private FileListAdapter adapter;
@@ -40,17 +38,12 @@ public class BigFileActivity extends TActivity {
     private static final int SEARCH = 10001;
     private static final int DELETE = 10002;
 
-    private ProgressDialog loadingDialog = null;
-
-
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case SEARCH:
-                    if(loadingDialog!=null){
-                        loadingDialog.dismiss();
-                    }
+                    ProgressWheelDialog.getInstance(BigFileActivity.this).dismiss();
                     adapter.setAllCheck(true);
                     allCheckBox.setChecked(true);
 //                    adapter.notifyDataSetChanged();
@@ -74,12 +67,17 @@ public class BigFileActivity extends TActivity {
         initViews();
         initData();
     }
+
     private void initData() {
         adapter = new FileListAdapter(this, files, R.layout.item_list_file);
         fileListView.setAdapter(adapter);
-        loadingDialog.show();
-        searchThread.start();
+        startScanSD();
 
+    }
+
+    private void startScanSD() {
+        ProgressWheelDialog.getInstance(this).show();
+        new Thread(searchRun).start();
     }
 
     private void initViews() {
@@ -90,7 +88,7 @@ public class BigFileActivity extends TActivity {
         allCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                Log.v("info","checked status " +checked);
+
                 if (checked) {
                     adapter.setAllCheck(true);
                 } else {
@@ -98,8 +96,6 @@ public class BigFileActivity extends TActivity {
                 }
             }
         });
-
-
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,27 +103,12 @@ public class BigFileActivity extends TActivity {
             }
         });
 
-        loadingDialog = new ProgressDialog(this);
-        //实例化
-        loadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //设置进度条风格，风格为圆形，旋转的
-        loadingDialog.setTitle("Google");
-        //设置ProgressDialog 标题
-        loadingDialog.setMessage("文件查找中...");
-        //设置ProgressDialog 提示信息
-        loadingDialog.setIcon(R.mipmap.ic_launcher);
-        //设置ProgressDialog 标题图标
-        loadingDialog.setButton("Cancle", new DialogInterface.OnClickListener() {
+        addHeadRightBtn("重新扫描", new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+            public void onClick(View view) {
+                startScanSD();
             }
         });
-        //设置ProgressDialog 的一个Button
-        loadingDialog.setIndeterminate(false);
-        //设置ProgressDialog 的进度条是否不明确
-        loadingDialog.setCancelable(true);
-        //设置ProgressDialog 是否可以按退回按键取消
     }
 
     private Runnable deleteRun = new Runnable() {
@@ -135,7 +116,7 @@ public class BigFileActivity extends TActivity {
         public void run() {
             List<File> checkFiles = adapter.getCheckFiles();
             for (File file : checkFiles) {
-                if(file.exists()){
+                if (file.exists()) {
                     file.delete();
                 }
             }
@@ -144,20 +125,19 @@ public class BigFileActivity extends TActivity {
         }
     };
 
-    private Thread searchThread = new Thread(){
+    private Runnable searchRun = new Runnable() {
         @Override
         public void run() {
+            files.clear();
             FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
-//            handler.sendEmptyMessage(SEARCH);
-            handler.sendEmptyMessageDelayed(SEARCH,300);
+            handler.sendEmptyMessageDelayed(SEARCH, 300);
         }
     };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        deleteRun =null;
-        searchThread = null;
-        loadingDialog = null;
+        deleteRun = null;
+        searchRun = null;
     }
 }

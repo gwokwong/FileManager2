@@ -41,6 +41,15 @@ public class TActivity extends AppCompatActivity {
         }
     }
 
+    protected void addHeadRightBtn(String txtStr, View.OnClickListener listener){
+        View toolbarView = findViewById(R.id.common_head);
+        TextView textView = (TextView)toolbarView.findViewById(R.id.head_right_btn);
+        if(textView!=null) {
+            textView.setText(txtStr);
+            textView.setVisibility(View.VISIBLE);
+            textView.setOnClickListener(listener);
+        }
+    }
     protected Toolbar getToolbar(){
         View toolbarView = findViewById(R.id.common_head);
         Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);

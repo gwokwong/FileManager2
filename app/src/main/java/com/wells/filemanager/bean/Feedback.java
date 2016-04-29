@@ -7,34 +7,17 @@ import cn.bmob.v3.BmobObject;
  */
 public class Feedback extends BmobObject {
 
-    public static int CALL_TYPE_QQ = 1;
-    public static int CALL_TYPE_EMAIL = 2;
-    public static int CALL_TYPE_PHONE = 3;
-    public static int CALL_TYPE_WECHAT = 4;
+    private String title;
 
-    private String name;  //称呼
-
-    private int callType;  //类别  1qq  2邮箱  3手机  4微信号
-
-    private String msg; //建议或意见正文
-
-    private String callNum;  //联系方式
+    private String msg;
 
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCallType() {
-        return callType;
-    }
-
-    public void setCallType(int callType) {
-        this.callType = callType;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMsg() {
@@ -45,24 +28,8 @@ public class Feedback extends BmobObject {
         this.msg = msg;
     }
 
-
-    public String getCallNum() {
-        return callNum;
-    }
-
-    public void setCallNum(String callNum) {
-        this.callNum = callNum;
-    }
-
     @Override
     public String toString() {
-        return "Feedback{" +
-                "name='" + name + '\'' +
-                ", callType=" + callType +
-                ", msg='" + msg + '\'' +
-                ", callNum='" + callNum + '\'' +
-                '}';
+        return "Feedback{" +"title='" + title + '\'' +", msg='" + msg + '\'' +'}';
     }
-
-
 }

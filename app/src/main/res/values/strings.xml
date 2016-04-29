@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Clean</string>
+    <string name="app_name">SDClean</string>
 
     <!--main-->
     <string name="feedback">意见反馈</string>
@@ -9,10 +9,14 @@
 
 
     <!-- feedback-->
+    <string name="your_theme">您的主题:</string>
     <string name="suggestion_hint">您的宝贵意见是我们进步的源泉</string>
     <string name="question_submit">问题提交</string>
     <string name="feedback_begin">您有什么问题或者建议想对我们说？</string>
-    <string name="suggestion_tips">请详细描述您遇到的问题，有助于我们快速定位并解决问题，或留下您宝贵的建议或者意见，我们会认真进行评估！</string>
+    <string name="suggestion_tips">(*^_^*)请详细描述您遇到的问题，有助于我们快速定位并解决问题，或留下您宝贵的建议或者意见，我们会认真进行评估！</string>
+
+
+    <string name="loading">正在处理中...</string>
 
 
 </resources>

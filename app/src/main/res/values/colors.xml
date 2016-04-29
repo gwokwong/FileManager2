@@ -9,4 +9,9 @@
     <color name="body_hint">#B0B0B0</color>
     <color name="windowBackground">#F0EFF4</color>
 
+    <color name="loading_bar">#D02D40</color>
+    <color name="color_e0e0e0">#e0e0e0</color>
+
+    <color name="text_pressed">#B0B0B0</color>
+
 </resources>

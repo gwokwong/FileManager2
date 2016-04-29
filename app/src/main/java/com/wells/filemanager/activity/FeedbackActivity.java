@@ -1,111 +1,113 @@
 package com.wells.filemanager.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.wells.filemanager.R;
 import com.wells.filemanager.bean.Feedback;
+import com.wells.filemanager.widget.ProgressWheelDialog;
 
 import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by wells on 16/4/23.
  */
-public class FeedbackActivity extends TActivity {
+public class FeedbackActivity extends TActivity implements View.OnClickListener {
 
-    private EditText nameEt,callNumEt,suggestionEt;
-    private RadioGroup calltypeRg;
-    private RadioButton QQRb,EmailRb,phoneRb,weChatRb;
+    private EditText titleEt, suggestionEt;
     private Button submitBtn;
-    private int callType;
-
+    private Context mContext;
+    private CoordinatorLayout container;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         initViews();
-        setTitle(R.string.feedback,true);
+        setTitle(R.string.feedback, true);
+        mContext = FeedbackActivity.this;
     }
 
-    private void initViews(){
-//        nameEt = (EditText)findViewById(R.id.feedback_name);
-//        callNumEt = (EditText)findViewById(R.id.feedback_call_num);
-//        suggestionEt = (EditText)findViewById(R.id.feedback_suggestion);
-//        calltypeRg = (RadioGroup)findViewById(R.id.feedback_call_type_rg);
-//        QQRb = (RadioButton)findViewById(R.id.feedback_qq);
-//        EmailRb = (RadioButton)findViewById(R.id.feedback_email);
-//        phoneRb = (RadioButton)findViewById(R.id.feedback_phone);
-//        weChatRb = (RadioButton)findViewById(R.id.feedback_wechat);
-//        submitBtn = (Button)findViewById(R.id.feedback_submit);
-//
-//        calltypeRg.check(QQRb.getId());
-//
-//        showKeyboardDelayed(nameEt);
-//
-//        calltypeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                int radioButtonId = radioGroup.getCheckedRadioButtonId();
-//                switch (radioButtonId){
-//                    case R.id.feedback_qq:
-//                        callType = Feedback.CALL_TYPE_QQ;
-//                        break;
-//                    case R.id.feedback_email:
-//                        callType =Feedback.CALL_TYPE_EMAIL;
-//                        break;
-//                    case R.id.feedback_phone:
-//                        callType =Feedback.CALL_TYPE_PHONE;
-//                        break;
-//                    case R.id.feedback_wechat:
-//                        callType =Feedback.CALL_TYPE_WECHAT;
-//                        break;
-//                    default:
-//                        break;
-//
-//                }
-//            }
-//        });
-//
-//        submitBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(TextUtils.isEmpty(suggestionEt.getText().toString())){
-//                    toast("意见为空,请输入您的意见或者建议后再提交");
-//                    return;
-//                }
-//
-//                Feedback feedback = new Feedback();
-//                feedback.setCallNum(callNumEt.getText().toString());
-//                feedback.setCallType(callType);
-//                feedback.setMsg(suggestionEt.getText().toString());
-//                feedback.setName(nameEt.getText().toString());
-//
-//                feedback.save(FeedbackActivity.this, new SaveListener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        toast("感谢您的提交,我们会尽快查看您的建议和意见");
-//                        //清空操作 or add 延时退出当前界面
-//                        nameEt.setText("");
-//                        callNumEt.setText("");
-//                        suggestionEt.setText("");
-//                        calltypeRg.check(QQRb.getId());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int i, String s) {
-//                        toast("提交失败");
-//
-//                    }
-//                });
-//
-//            }
-//        });
+    private void initViews() {
+        titleEt = (EditText) findViewById(R.id.feedback_theme);
+        suggestionEt = (EditText) findViewById(R.id.feedback_suggestion);
+        submitBtn = (Button) findViewById(R.id.feedback_submit);
+        submitBtn.setOnClickListener(this);
+        container = (CoordinatorLayout) findViewById(R.id.container);
     }
+
+    @Override
+    public void onClick(View view) {
+
+        showKeyboard(false);
+
+        if (TextUtils.isEmpty(titleEt.getText().toString())) {
+            toast("主题为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(suggestionEt.getText().toString())) {
+            toast("意见为空,请输入您的意见或者建议后再提交");
+            return;
+        }
+
+        Feedback feedback = new Feedback();
+        feedback.setTitle(titleEt.getText().toString());
+        feedback.setMsg(suggestionEt.getText().toString());
+        feedback.save(FeedbackActivity.this, new SaveListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+//                ProgressWheelDialog.getInstance(mContext).setLoadingMsg("正在通讯中...").show();
+                ProgressWheelDialog.getInstance(mContext).show();
+            }
+
+            @Override
+            public void onSuccess() {
+                titleEt.setText("");
+                suggestionEt.setText("");
+                Snackbar("感谢您的提交,本页将在1秒后关闭");
+                mHandler.sendEmptyMessageDelayed(0,2500);
+            }
+
+
+            @Override
+            public void onFailure(int i, String s) {
+                toast("提交失败");
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                ProgressWheelDialog.getInstance(mContext).dismiss();
+
+
+            }
+        });
+
+    }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            finish();
+        }
+    };
+
+    public void Snackbar(String msg) {
+        Snackbar.make(container, msg, Snackbar.LENGTH_LONG).show();
+    }
+
 }

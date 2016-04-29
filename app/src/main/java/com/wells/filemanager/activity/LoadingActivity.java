@@ -21,6 +21,7 @@ public class LoadingActivity extends TActivity {
     private void initData() {
         //补丁检测
         startActivity(new Intent(this,MainActivity.class));
+        finish();
 
     }
 }
