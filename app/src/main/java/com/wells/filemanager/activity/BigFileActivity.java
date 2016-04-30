@@ -5,6 +5,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -116,16 +119,24 @@ public class BigFileActivity extends TActivity {
                 startScanSD();
             }
         });
-        fileListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//        fileListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long l) {
+////                File file = adapter.getItem(pos);
+////                FileUtils.openFile(BigFileActivity.this,file);
+////                view.showContextMenu();
+//                return false;
+//            }
+//        });
+        fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                File file = adapter.getItem(pos);
-                FileUtils.openFile(BigFileActivity.this,file);
-                return false;
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                adapter.setmPos(pos);
             }
         });
 
         countTv = (TextView)findViewById(R.id.bigfile_count_check);
+        registerForContextMenu(fileListView);
     }
 
     private Runnable deleteRun = new Runnable() {
@@ -158,5 +169,28 @@ public class BigFileActivity extends TActivity {
         searchRun = null;
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.bigfile_menu, menu);
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // 得到当前被选中的item信息
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        File file = adapter.getItem(menuInfo.position);
+
+        switch (item.getItemId()){
+            case R.id.open:
+                toast("点击了打开按钮"+adapter.getItem(menuInfo.position));
+                FileUtils.openFile(BigFileActivity.this,file);
+                break;
+            case R.id.delete:
+                toast("点击了删除按钮");
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
 }

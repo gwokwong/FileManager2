@@ -41,6 +41,16 @@ public class FileListAdapter extends CommonAdapter<File> {
         return checkFiles;
     }
 
+    public void setmPos(int position){
+        if (mPos.contains(position)) {
+            mPos.remove((Integer)position);
+        } else {
+            mPos.add(position);
+        }
+        notifyDataSetChanged();
+
+    }
+
 
     @Override
     public void convert(final ViewHolder holder, File file) {
@@ -49,6 +59,7 @@ public class FileListAdapter extends CommonAdapter<File> {
 
         Button checked = holder.getView(R.id.item_file_image);
         if (mPos.contains(holder.getPosition())) {
+//            checked.setImageResource(R.mipmap.chexkbox_pressed);
             checked.setBackgroundResource(R.mipmap.chexkbox_pressed);
         } else {
             checked.setBackgroundResource(R.mipmap.chexkbox_normal);
@@ -65,6 +76,20 @@ public class FileListAdapter extends CommonAdapter<File> {
                 notifyDataSetChanged();
             }
         });
+
+//        RelativeLayout re = holder.getView(R.id.item_file_layout);
+//        re.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mPos.contains(holder.getPosition())) {
+//                    mPos.remove((Integer) holder.getPosition());
+//                } else {
+//                    mPos.add(holder.getPosition());
+//                }
+//                notifyDataSetChanged();
+//            }
+//        });
+
 
     }
 }
