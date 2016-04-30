@@ -25,7 +25,12 @@ public class FileListAdapter extends CommonAdapter<File> {
     public void setAllCheck(boolean isAllCheck) {
         if (isAllCheck) {
             for (int i = 0; i < mDatas.size(); i++) {
-                mPos.add(i);
+                if(mPos.contains(i)){
+
+                }else {
+                    mPos.add(i);
+                }
+
             }
         } else {
             mPos.clear();
@@ -48,7 +53,6 @@ public class FileListAdapter extends CommonAdapter<File> {
             mPos.add(position);
         }
         notifyDataSetChanged();
-
     }
 
 

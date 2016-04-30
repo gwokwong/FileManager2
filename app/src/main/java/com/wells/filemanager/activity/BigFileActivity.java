@@ -16,9 +16,11 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wells.filemanager.Config;
 import com.wells.filemanager.R;
 import com.wells.filemanager.adapter.FileListAdapter;
 import com.wells.filemanager.util.FileUtils;
+import com.wells.filemanager.util.PrefUtils;
 import com.wells.filemanager.widget.ProgressWheelDialog;
 
 import java.io.File;
@@ -36,7 +38,7 @@ public class BigFileActivity extends TActivity {
     private TextView countTv;
 
     //默认设置超过500M为大文件
-    private int defaultBigFileSize = 500;
+    private int defaultBigFileSize = 10;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
     private FileListAdapter adapter;
@@ -55,7 +57,7 @@ public class BigFileActivity extends TActivity {
 //                    adapter.notifyDataSetChanged();
 
                     //更新文本
-                    String text = String.format(getResources().getString(R.string.count_check),adapter.getCount());
+                    String text = String.format(getResources().getString(R.string.count_check), adapter.getCount());
                     countTv.setText(text);
                     break;
                 case DELETE:
@@ -81,6 +83,7 @@ public class BigFileActivity extends TActivity {
     private void initData() {
         adapter = new FileListAdapter(this, files, R.layout.item_list_file);
         fileListView.setAdapter(adapter);
+        defaultBigFileSize = PrefUtils.getIntValue(Config.SHARE_KEY_BIGFILE_SIZE);
         startScanSD();
 
     }
@@ -135,7 +138,7 @@ public class BigFileActivity extends TActivity {
             }
         });
 
-        countTv = (TextView)findViewById(R.id.bigfile_count_check);
+        countTv = (TextView) findViewById(R.id.bigfile_count_check);
         registerForContextMenu(fileListView);
     }
 
@@ -182,10 +185,10 @@ public class BigFileActivity extends TActivity {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         File file = adapter.getItem(menuInfo.position);
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.open:
-                toast("点击了打开按钮"+adapter.getItem(menuInfo.position));
-                FileUtils.openFile(BigFileActivity.this,file);
+                toast("点击了打开按钮" + adapter.getItem(menuInfo.position));
+                FileUtils.openFile(BigFileActivity.this, file);
                 break;
             case R.id.delete:
                 toast("点击了删除按钮");

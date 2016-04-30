@@ -43,6 +43,9 @@ public class MainActivity extends TActivity {
             case R.id.bigFileBtn: //大文件查找
                 startActivity(new Intent(MainActivity.this, BigFileActivity.class));
                 break;
+            case R.id.setBtn: //大文件查找
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                break;
             default:
                 break;
         }
