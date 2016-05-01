@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wells.filemanager.R;
 
@@ -56,9 +55,9 @@ public class TActivity extends AppCompatActivity {
     }
 
 
-    protected void toast(CharSequence msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    }
+//    protected void toast(CharSequence msg) {
+//        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

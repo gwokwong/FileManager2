@@ -12,7 +12,7 @@ import com.wells.filemanager.R;
 import com.wells.filemanager.util.PrefUtils;
 
 /**
- * Created by wei on 16/4/30.
+ * Created by wells on 16/4/30.
  */
 public class SettingActivity extends TActivity {
 
@@ -24,7 +24,6 @@ public class SettingActivity extends TActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-
         setTitle(R.string.setting, true);
         addHeadRightBtn("保存", new View.OnClickListener() {
             @Override
@@ -32,14 +31,12 @@ public class SettingActivity extends TActivity {
                 showKeyboard(false);
                 String size = sizeEt.getText().toString();
                 if (size.isEmpty()) {
-//                    toast("默认大小不能为空");
                     Snackbar("默认大小不能为空");
                     return;
                 }
 
                 int sizeValue = Integer.valueOf(size);
                 PrefUtils.putIntValue(Config.SHARE_KEY_BIGFILE_SIZE, sizeValue);
-//                toast("保存成功!");
                 Snackbar("保存成功,本页将在1秒后关闭");
                 mHandler.sendEmptyMessageDelayed(0, 1700);
             }
@@ -49,8 +46,6 @@ public class SettingActivity extends TActivity {
         String lastSize = String.valueOf(PrefUtils.getIntValue(Config.SHARE_KEY_BIGFILE_SIZE));
         sizeEt.setText(lastSize);
         sizeEt.setSelection(lastSize.length());
-
-
     }
 
     private Handler mHandler = new Handler() {
@@ -60,6 +55,7 @@ public class SettingActivity extends TActivity {
             finish();
         }
     };
+
 
 
 }

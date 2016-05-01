@@ -50,12 +50,12 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         showKeyboard(false);
 
         if (TextUtils.isEmpty(titleEt.getText().toString())) {
-            toast("主题为空");
+            Snackbar("主题为空");
             return;
         }
 
         if (TextUtils.isEmpty(suggestionEt.getText().toString())) {
-            toast("意见为空,请输入您的意见或者建议后再提交");
+            Snackbar("意见为空,请输入您的意见或者建议后再提交");
             return;
         }
 
@@ -66,8 +66,6 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
             @Override
             public void onStart() {
                 super.onStart();
-//                ProgressWheelDialog.getInstance(mContext).setLoadingMsg("正在通讯中...").show();
-//                ProgressWheelDialog.getInstance(mContext).show();
                 loadingDialog.show();
             }
 
@@ -83,9 +81,7 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
 
             @Override
             public void onFailure(int i, String s) {
-                toast("提交失败");
-
-
+                Snackbar("提交失败");
             }
 
             @Override

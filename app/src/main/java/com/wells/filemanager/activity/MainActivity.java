@@ -38,7 +38,6 @@ public class MainActivity extends TActivity {
         switch (view.getId()) {
             case R.id.deleteEmptyDirBtn:  //删除空目录
                 executeDialog.show();
-//                ProgressWheelDialog.getInstance(MainActivity.this).show();
                 new Thread(deleteDirThread).start();
                 break;
             case R.id.feedbackBtn: //意见反馈
@@ -80,8 +79,7 @@ public class MainActivity extends TActivity {
             switch (msg.what) {
                 case DELETE_DIR:
                     executeDialog.dismiss();
-//                    ProgressWheelDialog.getInstance(MainActivity.this).dismiss();
-                    toast("删除完成");
+                    Snackbar("删除完成");
                     break;
             }
             super.handleMessage(msg);

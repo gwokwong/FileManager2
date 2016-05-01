@@ -62,32 +62,16 @@ public class BigFileActivity extends TActivity {
             switch (msg.what) {
                 case SEARCH:
                     executeDialog.dismiss();
-//                    ProgressWheelDialog.getInstance(BigFileActivity.this).dismiss();
-
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            adapter.setDatas(files);
-//                        }
-//                    });
-//                    adapter.notifyDataSetChanged();
                     adapter.setAllCheck(true);
                     allCheckBox.setChecked(true);
                     String text = String.format(getResources().getString(R.string.count_check), adapter.getCount());
                     countTv.setText(text);
                     break;
                 case DELETE:
-                    toast("删除成功!");
-//                    adapter.setDatas(new ArrayList<File>());  //逻辑处理错误
-                    //更新数据
-
-
                     adapter.updateData();
-//                    adapter.notifyDataSetChanged();
-
                     break;
                 case DELETE_ONE:
-                    toast("文件删除成功");
+                    Snackbar("文件删除成功");
                     files.remove(nowChoosePosition);
                     adapter.notifyDataSetChanged();
                     break;
@@ -234,11 +218,8 @@ public class BigFileActivity extends TActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         new Thread(deleteFileThread).start();
-//                        Snackbar("提示信息");
                     }
                 });
-
-
                 break;
             default:
                 break;

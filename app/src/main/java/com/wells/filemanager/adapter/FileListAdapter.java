@@ -74,10 +74,9 @@ public class FileListAdapter extends CommonAdapter<File> {
 
         Button checked = holder.getView(R.id.item_file_image);
         if (mPos.contains(holder.getPosition())) {
-//            checked.setImageResource(R.mipmap.chexkbox_pressed);
-            checked.setBackgroundResource(R.mipmap.chexkbox_pressed);
+            checked.setBackgroundResource(R.drawable.chexkbox_pressed);
         } else {
-            checked.setBackgroundResource(R.mipmap.chexkbox_normal);
+            checked.setBackgroundResource(R.drawable.chexkbox_normal);
         }
 
         checked.setOnClickListener(new View.OnClickListener() {
