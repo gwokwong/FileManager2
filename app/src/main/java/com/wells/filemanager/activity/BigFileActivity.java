@@ -1,10 +1,12 @@
 package com.wells.filemanager.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,12 +54,23 @@ public class BigFileActivity extends TActivity {
     //当前选中项的索引
     private int nowChoosePosition = -1;
 
+    private ProgressWheelDialog executeDialog = null;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SEARCH:
-                    ProgressWheelDialog.getInstance(BigFileActivity.this).dismiss();
+                    executeDialog.dismiss();
+//                    ProgressWheelDialog.getInstance(BigFileActivity.this).dismiss();
+
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            adapter.setDatas(files);
+//                        }
+//                    });
+//                    adapter.notifyDataSetChanged();
                     adapter.setAllCheck(true);
                     allCheckBox.setChecked(true);
                     String text = String.format(getResources().getString(R.string.count_check), adapter.getCount());
@@ -65,7 +78,13 @@ public class BigFileActivity extends TActivity {
                     break;
                 case DELETE:
                     toast("删除成功!");
-                    adapter.setDatas(new ArrayList<File>());
+//                    adapter.setDatas(new ArrayList<File>());  //逻辑处理错误
+                    //更新数据
+
+
+                    adapter.updateData();
+//                    adapter.notifyDataSetChanged();
+
                     break;
                 case DELETE_ONE:
                     toast("文件删除成功");
@@ -96,6 +115,8 @@ public class BigFileActivity extends TActivity {
         confirmBtn = (Button) findViewById(R.id.bigfile_confirm_delete);
         countTv = (TextView) findViewById(R.id.bigfile_count_check);
         registerForContextMenu(fileListView);
+        executeDialog = new ProgressWheelDialog(this);
+        executeDialog.setMessage("正在执行操作...");
     }
 
     private void setListener() {
@@ -110,22 +131,23 @@ public class BigFileActivity extends TActivity {
         allCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-
-                if (checked) {
-                    adapter.setAllCheck(true);
-                } else {
-                    adapter.setAllCheck(false);
-                }
+                adapter.setAllCheck(checked);
             }
         });
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(deleteRun).start();
+                showConfirmDialog(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        new Thread(deleteRun).start();
+                    }
+                });
+
             }
         });
-
 
         fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -144,7 +166,8 @@ public class BigFileActivity extends TActivity {
     }
 
     private void startScanSD() {
-        ProgressWheelDialog.getInstance(this).show();
+//        ProgressWheelDialog.getInstance(this).show();
+        executeDialog.show();
         new Thread(searchRun).start();
     }
 
@@ -158,7 +181,6 @@ public class BigFileActivity extends TActivity {
                 }
             }
             handler.sendEmptyMessage(DELETE);
-
         }
     };
 
@@ -167,6 +189,7 @@ public class BigFileActivity extends TActivity {
         public void run() {
             files.clear();
             FileUtils.getGreaterSizeFiles(files, new File(Environment.getExternalStorageDirectory().getAbsolutePath()), defaultBigFileSize, defaultSizeType);
+
             handler.sendEmptyMessageDelayed(SEARCH, 300);
         }
     };
@@ -205,12 +228,31 @@ public class BigFileActivity extends TActivity {
                 FileUtils.openFile(BigFileActivity.this, nowChooseFile);
                 break;
             case R.id.delete:
-                new Thread(deleteFileThread).start();
+
+                showConfirmDialog(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        new Thread(deleteFileThread).start();
+//                        Snackbar("提示信息");
+                    }
+                });
+
+
                 break;
             default:
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void showConfirmDialog(DialogInterface.OnClickListener listener) {
+        new AlertDialog.Builder(this).setTitle("温馨提示").setMessage("是否确定删除").setPositiveButton("确定", listener).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).show();
     }
 
 }

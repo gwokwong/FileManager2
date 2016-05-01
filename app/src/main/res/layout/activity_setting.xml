@@ -36,7 +36,7 @@
             android:layout_toLeftOf="@+id/size_tv"
             android:background="@drawable/input_bg"
             android:inputType="number"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/size_tv"
@@ -50,8 +50,9 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/container"
+    <include
+        android:id="@+id/common_coordinator"
+        layout="@layout/coordinator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />

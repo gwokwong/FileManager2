@@ -23,18 +23,22 @@ public class MainActivity extends TActivity {
     private File sdFile;
 
     private static final int DELETE_DIR = 10000;
+    private ProgressWheelDialog executeDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name, false);
+        executeDialog = new ProgressWheelDialog(this);
+        executeDialog.setMessage("正在执行操作...");
     }
 
     public void menuClick(View view) {
         switch (view.getId()) {
             case R.id.deleteEmptyDirBtn:  //删除空目录
-                ProgressWheelDialog.getInstance(MainActivity.this).show();
+                executeDialog.show();
+//                ProgressWheelDialog.getInstance(MainActivity.this).show();
                 new Thread(deleteDirThread).start();
                 break;
             case R.id.feedbackBtn: //意见反馈
@@ -75,7 +79,8 @@ public class MainActivity extends TActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DELETE_DIR:
-                    ProgressWheelDialog.getInstance(MainActivity.this).dismiss();
+                    executeDialog.dismiss();
+//                    ProgressWheelDialog.getInstance(MainActivity.this).dismiss();
                     toast("删除完成");
                     break;
             }

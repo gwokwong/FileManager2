@@ -68,4 +68,13 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+
+    <include
+        android:id="@+id/common_coordinator"
+        layout="@layout/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

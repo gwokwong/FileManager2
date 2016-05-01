@@ -1,11 +1,11 @@
 package com.wells.filemanager.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -32,30 +32,28 @@ public class TActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
         if (null != toolbarView && null != toolbar) {
             toolbar.setTitle(resId);
-//            toolbar.setTitleTextColor(Color.WHITE);
             setSupportActionBar(toolbar);
             if (isDisplayHomeAsUpEnabled) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//                toolbar.setNavigationIcon(R.mipmap.back);
             }
         }
     }
 
-    protected void addHeadRightBtn(String txtStr, View.OnClickListener listener){
+    protected void addHeadRightBtn(String txtStr, View.OnClickListener listener) {
         View toolbarView = findViewById(R.id.common_head);
-        TextView textView = (TextView)toolbarView.findViewById(R.id.head_right_btn);
-        if(textView!=null) {
+        TextView textView = (TextView) toolbarView.findViewById(R.id.head_right_btn);
+        if (textView != null) {
             textView.setText(txtStr);
             textView.setVisibility(View.VISIBLE);
             textView.setOnClickListener(listener);
         }
     }
-    protected Toolbar getToolbar(){
+
+    protected Toolbar getToolbar() {
         View toolbarView = findViewById(R.id.common_head);
         Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
         return toolbar;
     }
-
 
 
     protected void toast(CharSequence msg) {
@@ -92,6 +90,11 @@ public class TActivity extends AppCompatActivity {
         }, 200);
     }
 
+    /**
+     * 键盘操作
+     *
+     * @param isShow
+     */
     protected void showKeyboard(boolean isShow) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (isShow) {
@@ -107,30 +110,17 @@ public class TActivity extends AppCompatActivity {
         }
     }
 
-    public static TextView addRightClickableTextViewOnToolBar(Activity activity, String text) {
-        View toolbarView = activity.findViewById(R.id.common_head);
-        Toolbar toolbar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
-        if (null != toolbarView && null != toolbar) {
-            View view = LayoutInflater.from(activity).inflate(R.layout.nim_action_bar_right_clickable_tv, null);
-            TextView textView = (TextView) view.findViewById(R.id.action_bar_right_clickable_textview);
-            textView.setText(text);
-            return textView;
+    /**
+     * 提示信息
+     *
+     * @param msg
+     */
+    protected void Snackbar(String msg) {
+        View coordView = findViewById(R.id.common_coordinator);
+        CoordinatorLayout container = (CoordinatorLayout) coordView.findViewById(R.id.container);
+        if (coordView != null && container != null) {
+            Snackbar.make(container, msg, Snackbar.LENGTH_LONG).show();
         }
-
-        return null;
-
-
-//        ActionBar actionBar = activity.getSupportActionBar();
-//        actionBar.setDisplayShowCustomEnabled(true);
-//        actionBar.setDisplayShowTitleEnabled(true);
-//
-//        View view = LayoutInflater.from(activity).inflate(R.layout.nim_action_bar_right_clickable_tv, null);
-//        TextView textView = (TextView) view.findViewById(R.id.action_bar_right_clickable_textview);
-//        textView.setText(text);
-//        toolbar.setCu
-//        actionBar.setCustomView(view, new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT | Gravity.CENTER));
-//        return textView;
     }
 
 

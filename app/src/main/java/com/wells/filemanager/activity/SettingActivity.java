@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -19,7 +17,7 @@ import com.wells.filemanager.util.PrefUtils;
 public class SettingActivity extends TActivity {
 
     private EditText sizeEt;
-    private CoordinatorLayout container;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class SettingActivity extends TActivity {
         String lastSize = String.valueOf(PrefUtils.getIntValue(Config.SHARE_KEY_BIGFILE_SIZE));
         sizeEt.setText(lastSize);
         sizeEt.setSelection(lastSize.length());
-        container = (CoordinatorLayout) findViewById(R.id.container);
+
 
     }
 
@@ -63,7 +61,5 @@ public class SettingActivity extends TActivity {
         }
     };
 
-    public void Snackbar(String msg) {
-        Snackbar.make(container, msg, Snackbar.LENGTH_LONG).show();
-    }
+
 }

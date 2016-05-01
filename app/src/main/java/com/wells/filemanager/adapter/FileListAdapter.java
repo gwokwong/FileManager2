@@ -46,6 +46,17 @@ public class FileListAdapter extends CommonAdapter<File> {
         return checkFiles;
     }
 
+    public void updateData(){
+        List<File> files = new ArrayList<File>();
+        for (int i = 0; i < mPos.size(); i++) {
+            files.add(mDatas.get(mPos.get(i)));
+
+        }
+        mDatas.removeAll(files);
+        mPos.clear();
+        notifyDataSetChanged();
+    }
+
     public void setmPos(int position){
         if (mPos.contains(position)) {
             mPos.remove((Integer)position);
@@ -80,20 +91,6 @@ public class FileListAdapter extends CommonAdapter<File> {
                 notifyDataSetChanged();
             }
         });
-
-//        RelativeLayout re = holder.getView(R.id.item_file_layout);
-//        re.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (mPos.contains(holder.getPosition())) {
-//                    mPos.remove((Integer) holder.getPosition());
-//                } else {
-//                    mPos.add(holder.getPosition());
-//                }
-//                notifyDataSetChanged();
-//            }
-//        });
-
 
     }
 }

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +24,7 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
     private EditText titleEt, suggestionEt;
     private Button submitBtn;
     private Context mContext;
-    private CoordinatorLayout container;
+    private ProgressWheelDialog loadingDialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +40,8 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         suggestionEt = (EditText) findViewById(R.id.feedback_suggestion);
         submitBtn = (Button) findViewById(R.id.feedback_submit);
         submitBtn.setOnClickListener(this);
-        container = (CoordinatorLayout) findViewById(R.id.container);
+        loadingDialog = new ProgressWheelDialog(this);
+        loadingDialog.setMessage("正在提交数据...");
     }
 
     @Override
@@ -68,15 +67,17 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
             public void onStart() {
                 super.onStart();
 //                ProgressWheelDialog.getInstance(mContext).setLoadingMsg("正在通讯中...").show();
-                ProgressWheelDialog.getInstance(mContext).show();
+//                ProgressWheelDialog.getInstance(mContext).show();
+                loadingDialog.show();
             }
+
 
             @Override
             public void onSuccess() {
                 titleEt.setText("");
                 suggestionEt.setText("");
                 Snackbar("感谢您的提交,本页将在1秒后关闭");
-                mHandler.sendEmptyMessageDelayed(0,2500);
+                mHandler.sendEmptyMessageDelayed(0,1700);
             }
 
 
@@ -90,9 +91,7 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
             @Override
             public void onFinish() {
                 super.onFinish();
-                ProgressWheelDialog.getInstance(mContext).dismiss();
-
-
+                loadingDialog.dismiss();
             }
         });
 
@@ -106,8 +105,5 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         }
     };
 
-    public void Snackbar(String msg) {
-        Snackbar.make(container, msg, Snackbar.LENGTH_LONG).show();
-    }
 
 }

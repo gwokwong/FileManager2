@@ -15,7 +15,7 @@ public class PrefUtils {
 
     private static String DEFAULT_STR_VALUE = "";
 
-    private static int DEFAULT_INT_VALUE = -1;
+    private static int DEFAULT_INT_VALUE = 15;
 
     static {
         shared = FileApplication.getInstance().getSharedPreferences(Config.SHARE_NAME, Context.MODE_PRIVATE);

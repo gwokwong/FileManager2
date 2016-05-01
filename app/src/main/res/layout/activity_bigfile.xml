@@ -15,44 +15,50 @@
         android:layout_below="@id/common_head"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
+        android:checked="false"
         android:scaleX="1.2"
         android:scaleY="1.2"
-        android:checked="false"
         android:text="全选" />
-
 
 
     <ListView
         android:id="@+id/bigfile_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_above="@+id/bigfile_confirm_delete"
         android:layout_below="@id/bigfile_all_check"
+        android:layout_marginTop="10dp"
         android:choiceMode="multipleChoice">
 
     </ListView>
+
+
+    <TextView
+        android:id="@+id/bigfile_count_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bigfile_confirm_delete"
+        android:layout_alignStart="@+id/bigfile_confirm_delete"
+        android:layout_below="@+id/common_head"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/bigfile_confirm_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/common_coordinator"
         android:layout_margin="10dp"
+        android:background="@drawable/common_btn_bg"
         android:text="确定删除"
-        android:textSize="16sp"
-        android:background="@drawable/common_btn_bg"/>
+        android:textSize="16sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/common_coordinator"
+        layout="@layout/coordinator"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/bigfile_count_check"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="16sp"
-        android:layout_below="@+id/common_head"
-        android:layout_alignLeft="@+id/bigfile_confirm_delete"
-        android:layout_alignStart="@+id/bigfile_confirm_delete" />
-
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

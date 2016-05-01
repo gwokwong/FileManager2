@@ -19,12 +19,11 @@
 
     <EditText
         android:id="@+id/feedback_theme"
+        style="@style/body_text"
         android:layout_below="@+id/begin_tv"
         android:layout_margin="10dp"
-        style="@style/body_text"
-        android:hint="@string/your_theme"
         android:background="@drawable/input_bg"
-        />
+        android:hint="@string/your_theme" />
 
 
     <EditText
@@ -32,21 +31,21 @@
         style="@style/body_text"
         android:layout_below="@+id/feedback_theme"
         android:layout_margin="10dp"
-        android:gravity="left|top"
         android:background="@drawable/input_bg"
+        android:gravity="left|top"
         android:hint="@string/suggestion_hint"
         android:minLines="5"
         android:padding="10dp" />
 
     <TextView
+        android:id="@+id/suggestion_last_tips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/suggestion_last_tips"
         android:layout_below="@+id/feedback_suggestion"
         android:layout_margin="10dp"
-        android:textSize="14sp"
+        android:text="@string/suggestion_tips"
         android:textColor="@color/body_hint"
-        android:text="@string/suggestion_tips"/>
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/feedback_submit"
@@ -54,14 +53,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/suggestion_last_tips"
         android:layout_margin="10dp"
+        android:background="@drawable/common_btn_bg"
         android:text="@string/question_submit"
-        android:textSize="16sp"
-        android:background="@drawable/common_btn_bg"/>
+        android:textSize="16sp" />
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/container"
+
+    <include
+        android:id="@+id/common_coordinator"
+        layout="@layout/coordinator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
-
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
