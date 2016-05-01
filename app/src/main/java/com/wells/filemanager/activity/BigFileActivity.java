@@ -37,7 +37,7 @@ public class BigFileActivity extends TActivity {
     private List<File> files = new ArrayList<File>();
     private TextView countTv;
 
-    //默认设置超过500M为大文件
+    //默认设置超过10M为大文件
     private int defaultBigFileSize = 10;
     private int defaultSizeType = FileUtils.TYPE_MB;
 
@@ -45,6 +45,12 @@ public class BigFileActivity extends TActivity {
 
     private static final int SEARCH = 10001;
     private static final int DELETE = 10002;
+    private static final int DELETE_ONE = 10003;
+
+    //当前选中的要操作的文件
+    private File nowChooseFile = null;
+    //当前选中项的索引
+    private int nowChoosePosition = -1;
 
     private Handler handler = new Handler() {
         @Override
@@ -54,15 +60,17 @@ public class BigFileActivity extends TActivity {
                     ProgressWheelDialog.getInstance(BigFileActivity.this).dismiss();
                     adapter.setAllCheck(true);
                     allCheckBox.setChecked(true);
-//                    adapter.notifyDataSetChanged();
-
-                    //更新文本
                     String text = String.format(getResources().getString(R.string.count_check), adapter.getCount());
                     countTv.setText(text);
                     break;
                 case DELETE:
                     toast("删除成功!");
                     adapter.setDatas(new ArrayList<File>());
+                    break;
+                case DELETE_ONE:
+                    toast("文件删除成功");
+                    files.remove(nowChoosePosition);
+                    adapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -77,26 +85,27 @@ public class BigFileActivity extends TActivity {
         setContentView(R.layout.activity_bigfile);
         setTitle(R.string.bigFile, true);
         initViews();
+        setListener();
         initData();
     }
 
-    private void initData() {
-        adapter = new FileListAdapter(this, files, R.layout.item_list_file);
-        fileListView.setAdapter(adapter);
-        defaultBigFileSize = PrefUtils.getIntValue(Config.SHARE_KEY_BIGFILE_SIZE);
-        startScanSD();
-
-    }
-
-    private void startScanSD() {
-        ProgressWheelDialog.getInstance(this).show();
-        new Thread(searchRun).start();
-    }
 
     private void initViews() {
         fileListView = (ListView) findViewById(R.id.bigfile_listview);
         allCheckBox = (CheckBox) findViewById(R.id.bigfile_all_check);
         confirmBtn = (Button) findViewById(R.id.bigfile_confirm_delete);
+        countTv = (TextView) findViewById(R.id.bigfile_count_check);
+        registerForContextMenu(fileListView);
+    }
+
+    private void setListener() {
+
+        addHeadRightBtn("重新扫描", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startScanSD();
+            }
+        });
 
         allCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -109,6 +118,7 @@ public class BigFileActivity extends TActivity {
                 }
             }
         });
+
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,21 +126,7 @@ public class BigFileActivity extends TActivity {
             }
         });
 
-        addHeadRightBtn("重新扫描", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startScanSD();
-            }
-        });
-//        fileListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long l) {
-////                File file = adapter.getItem(pos);
-////                FileUtils.openFile(BigFileActivity.this,file);
-////                view.showContextMenu();
-//                return false;
-//            }
-//        });
+
         fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
@@ -138,8 +134,18 @@ public class BigFileActivity extends TActivity {
             }
         });
 
-        countTv = (TextView) findViewById(R.id.bigfile_count_check);
-        registerForContextMenu(fileListView);
+    }
+
+    private void initData() {
+        adapter = new FileListAdapter(this, files, R.layout.item_list_file);
+        fileListView.setAdapter(adapter);
+        defaultBigFileSize = PrefUtils.getIntValue(Config.SHARE_KEY_BIGFILE_SIZE);
+        startScanSD();
+    }
+
+    private void startScanSD() {
+        ProgressWheelDialog.getInstance(this).show();
+        new Thread(searchRun).start();
     }
 
     private Runnable deleteRun = new Runnable() {
@@ -165,6 +171,15 @@ public class BigFileActivity extends TActivity {
         }
     };
 
+    private Runnable deleteFileThread = new Runnable() {
+
+        @Override
+        public void run() {
+            FileUtils.openFile(BigFileActivity.this, nowChooseFile);
+            handler.sendEmptyMessageDelayed(DELETE_ONE, 300);
+        }
+    };
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -183,17 +198,19 @@ public class BigFileActivity extends TActivity {
     public boolean onContextItemSelected(MenuItem item) {
         // 得到当前被选中的item信息
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        File file = adapter.getItem(menuInfo.position);
-
+        nowChoosePosition = menuInfo.position;
+        nowChooseFile = adapter.getItem(nowChoosePosition);
         switch (item.getItemId()) {
             case R.id.open:
-                toast("点击了打开按钮" + adapter.getItem(menuInfo.position));
-                FileUtils.openFile(BigFileActivity.this, file);
+                FileUtils.openFile(BigFileActivity.this, nowChooseFile);
                 break;
             case R.id.delete:
-                toast("点击了删除按钮");
+                new Thread(deleteFileThread).start();
+                break;
+            default:
                 break;
         }
         return super.onContextItemSelected(item);
     }
+
 }
