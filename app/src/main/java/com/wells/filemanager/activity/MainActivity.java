@@ -31,7 +31,7 @@ public class MainActivity extends TActivity {
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name, false);
         executeDialog = new ProgressWheelDialog(this);
-        executeDialog.setMessage("正在执行操作...");
+        executeDialog.setMessage(getString(R.string.deleteing));
     }
 
     public void menuClick(View view) {
@@ -79,7 +79,7 @@ public class MainActivity extends TActivity {
             switch (msg.what) {
                 case DELETE_DIR:
                     executeDialog.dismiss();
-                    Snackbar("删除完成");
+                    Snackbar(getString(R.string.delete_success));
                     break;
             }
             super.handleMessage(msg);

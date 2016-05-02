@@ -3,27 +3,47 @@
     <string name="app_name">SDClean</string>
 
     <!--main-->
-    <string name="feedback">意见反馈</string>
-    <string name="bigFile">大文件管理</string>
-    <string name="delete_empty_dir">一键删除空文件夹</string>
-    <string name="setting">设置</string>
-
+    <string name="deleteing">正在删除中...</string>
 
     <!-- feedback-->
+    <string name="feedback">意见反馈</string>
     <string name="your_theme">您的主题:</string>
     <string name="suggestion_hint">您的宝贵意见是我们进步的源泉</string>
     <string name="question_submit">问题提交</string>
     <string name="feedback_begin">您有什么问题或者建议想对我们说？</string>
     <string name="suggestion_tips">(*^_^*)请详细描述您遇到的问题，有助于我们快速定位并解决问题，或留下您宝贵的建议或者意见，我们会认真进行评估！</string>
+    <string name="submit_data">正在提交数据...</string>
+    <string name="theme_null">主题为空</string>
+    <string name="suggestion_null_tip">意见为空,请输入您的意见或者建议后再提交</string>
+    <string name="thanks_submit_close">感谢您的提交,本页将在1秒后关闭</string>
+    <string name="submit_failure">提交失败</string>
 
 
-    <!-- loading-->
+    <!-- loading && dialog-->
     <string name="loading">正在处理中...</string>
+    <string name="tips">温馨提示</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+
+    <!--bigfile-->
+    <string name="bigFile">大文件管理</string>
     <string name="count_check">共扫描出%1$d个文件</string>
+    <string name="delete_success">删除成功</string>
+    <string name="execute">正在执行操作...</string>
+    <string name="restart_scan">重新扫描</string>
+    <string name="confirm_delete_or_not">是否确定删除</string>
+    <string name="confirm_delete">确定删除</string>
+    <string name="open">打开</string>
+    <string name="delete">删除</string>
 
     <!-- setting-->
+    <string name="setting">设置</string>
     <string name="setting_bigfile_size">大文件起始容量</string>
-
+    <string name="save">保存</string>
+    <string name="default_size_not_null">默认大小不能为空</string>
+    <string name="save_success_close">保存成功,本页将在1秒后关闭</string>
+    <string name="MB">MB</string>
 
 
 </resources>

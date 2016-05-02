@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class FileUtils {
 
+    private static String TAG = FileUtils.class.getSimpleName();
+
     public static final int TYPE_B = 1;  // 以B为单位
     public static final int TYPE_KB = 2; // 以KB为单位
     public static final int TYPE_MB = 3; // 以MB为单位
@@ -45,7 +47,7 @@ public class FileUtils {
                 }
             }
         } catch (Exception e) {
-            Log.e("deleteFile", e.getMessage());
+            Log.e(TAG, e.getMessage());
             return;
         }
     }
@@ -97,11 +99,11 @@ public class FileUtils {
             } else {
                 if (getFileSize(file, sizeType) > size) {
                     files.add(file);
-                    Log.v("info", "size-->" + files.size());
+                    Log.v(TAG, "size-->" + files.size());
                 }
             }
         }
-        Log.v("info", "size length -->" + files.size());
+        Log.v(TAG, "size length -->" + files.size());
     }
 
     /**
@@ -196,7 +198,7 @@ public class FileUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("获取文件大小", "获取失败!");
+            Log.e(TAG,"get file size error!");
         }
         return FormetFileSize(blockSize);
     }
@@ -216,7 +218,7 @@ public class FileUtils {
             size = fis.available();
         } else {
             file.createNewFile();
-            Log.e("获取文件大小", "文件不存在!");
+            Log.e(TAG,"file is not exists");
         }
         return size;
     }

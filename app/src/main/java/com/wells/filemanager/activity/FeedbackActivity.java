@@ -41,7 +41,7 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         submitBtn = (Button) findViewById(R.id.feedback_submit);
         submitBtn.setOnClickListener(this);
         loadingDialog = new ProgressWheelDialog(this);
-        loadingDialog.setMessage("正在提交数据...");
+        loadingDialog.setMessage(getString(R.string.submit_data));
     }
 
     @Override
@@ -50,12 +50,12 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         showKeyboard(false);
 
         if (TextUtils.isEmpty(titleEt.getText().toString())) {
-            Snackbar("主题为空");
+            Snackbar(getString(R.string.theme_null));
             return;
         }
 
         if (TextUtils.isEmpty(suggestionEt.getText().toString())) {
-            Snackbar("意见为空,请输入您的意见或者建议后再提交");
+            Snackbar(getString(R.string.suggestion_null_tip));
             return;
         }
 
@@ -74,14 +74,14 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
             public void onSuccess() {
                 titleEt.setText("");
                 suggestionEt.setText("");
-                Snackbar("感谢您的提交,本页将在1秒后关闭");
-                mHandler.sendEmptyMessageDelayed(0,1700);
+                Snackbar(getString(R.string.thanks_submit_close));
+                mHandler.sendEmptyMessageDelayed(0, 1700);
             }
 
 
             @Override
             public void onFailure(int i, String s) {
-                Snackbar("提交失败");
+                Snackbar(getString(R.string.submit_failure));
             }
 
             @Override
@@ -93,7 +93,7 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
 
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

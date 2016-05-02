@@ -29,11 +29,11 @@ public class FileApplication extends Application {
         Bmob.initialize(getApplicationContext(), Config.BMOB_KEY);
 
         // 初始化patch管理类
-        mPatchManager = new PatchManager(this);
-        // 初始化patch版本
-        mPatchManager.init(getVersionName(this));
-        // 加载已经添加到PatchManager中的patch
-        mPatchManager.loadPatch();
+//        mPatchManager = new PatchManager(this);
+//        // 初始化patch版本
+//        mPatchManager.init(getVersionName(this));
+//        // 加载已经添加到PatchManager中的patch
+//        mPatchManager.loadPatch();
 
 
         //添加patch，只需指定patch的路径即可，补丁会立即生效

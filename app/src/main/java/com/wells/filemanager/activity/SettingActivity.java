@@ -25,19 +25,19 @@ public class SettingActivity extends TActivity {
         setContentView(R.layout.activity_setting);
 
         setTitle(R.string.setting, true);
-        addHeadRightBtn("保存", new View.OnClickListener() {
+        addHeadRightBtn(getString(R.string.save), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showKeyboard(false);
                 String size = sizeEt.getText().toString();
                 if (size.isEmpty()) {
-                    Snackbar("默认大小不能为空");
+                    Snackbar(getString(R.string.default_size_not_null));
                     return;
                 }
 
                 int sizeValue = Integer.valueOf(size);
                 PrefUtils.putIntValue(Config.SHARE_KEY_BIGFILE_SIZE, sizeValue);
-                Snackbar("保存成功,本页将在1秒后关闭");
+                Snackbar(getString(R.string.save_success_close));
                 mHandler.sendEmptyMessageDelayed(0, 1700);
             }
         });
@@ -55,7 +55,5 @@ public class SettingActivity extends TActivity {
             finish();
         }
     };
-
-
 
 }

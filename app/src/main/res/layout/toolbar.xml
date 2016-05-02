@@ -20,7 +20,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_marginRight="10dp"
-        android:text="测试"
+        android:text="@string/save"
         android:textColor="@color/head_text_selector"
         android:textSize="18sp"
         android:visibility="gone" />

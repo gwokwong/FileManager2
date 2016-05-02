@@ -71,7 +71,7 @@ public class BigFileActivity extends TActivity {
                     adapter.updateData();
                     break;
                 case DELETE_ONE:
-                    Snackbar("文件删除成功");
+                    Snackbar(getString(R.string.delete_success));
                     files.remove(nowChoosePosition);
                     adapter.notifyDataSetChanged();
                     break;
@@ -100,12 +100,12 @@ public class BigFileActivity extends TActivity {
         countTv = (TextView) findViewById(R.id.bigfile_count_check);
         registerForContextMenu(fileListView);
         executeDialog = new ProgressWheelDialog(this);
-        executeDialog.setMessage("正在执行操作...");
+        executeDialog.setMessage(getString(R.string.execute));
     }
 
     private void setListener() {
 
-        addHeadRightBtn("重新扫描", new View.OnClickListener() {
+        addHeadRightBtn(getString(R.string.restart_scan), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startScanSD();
@@ -150,7 +150,6 @@ public class BigFileActivity extends TActivity {
     }
 
     private void startScanSD() {
-//        ProgressWheelDialog.getInstance(this).show();
         executeDialog.show();
         new Thread(searchRun).start();
     }
@@ -228,7 +227,7 @@ public class BigFileActivity extends TActivity {
     }
 
     private void showConfirmDialog(DialogInterface.OnClickListener listener) {
-        new AlertDialog.Builder(this).setTitle("温馨提示").setMessage("是否确定删除").setPositiveButton("确定", listener).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setTitle(getString(R.string.tips)).setMessage(getString(R.string.confirm_delete_or_not)).setPositiveButton(getString(R.string.confirm), listener).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
