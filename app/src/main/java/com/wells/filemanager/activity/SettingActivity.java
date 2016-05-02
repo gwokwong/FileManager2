@@ -36,6 +36,11 @@ public class SettingActivity extends TActivity {
                 }
 
                 int sizeValue = Integer.valueOf(size);
+                if(sizeValue<1){
+                    Snackbar(getString(R.string.default_size_not_small));
+                    return;
+                }
+
                 PrefUtils.putIntValue(Config.SHARE_KEY_BIGFILE_SIZE, sizeValue);
                 Snackbar(getString(R.string.save_success_close));
                 mHandler.sendEmptyMessageDelayed(0, 1700);
