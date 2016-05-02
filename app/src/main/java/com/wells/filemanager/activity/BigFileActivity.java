@@ -211,7 +211,6 @@ public class BigFileActivity extends TActivity {
                 FileUtils.openFile(BigFileActivity.this, nowChooseFile);
                 break;
             case R.id.delete:
-
                 showConfirmDialog(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
