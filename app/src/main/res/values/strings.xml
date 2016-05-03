@@ -42,6 +42,7 @@
     <string name="setting_bigfile_size">大文件起始容量</string>
     <string name="save">保存</string>
     <string name="default_size_not_null">默认大小不能为空</string>
+    <string name="default_size_not_small">默认大小不能为小于1</string>
     <string name="save_success_close">保存成功,本页将在1秒后关闭</string>
     <string name="MB">MB</string>
 
