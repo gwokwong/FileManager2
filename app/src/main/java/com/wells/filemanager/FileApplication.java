@@ -1,11 +1,15 @@
 package com.wells.filemanager;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.alipay.euler.andfix.patch.PatchManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
@@ -15,6 +19,8 @@ import cn.bmob.v3.Bmob;
 public class FileApplication extends Application {
 
     public static FileApplication instance;
+
+    public static List<Activity> activityList = new ArrayList<Activity>();
 
     public static FileApplication getInstance(){
         return  instance;
@@ -54,5 +60,14 @@ public class FileApplication extends Application {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public void exit() {
+        for (Activity activity : activityList) {
+            activity.finish();
+        }
+
+        System.exit(0);
     }
 }

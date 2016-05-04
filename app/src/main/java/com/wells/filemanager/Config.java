@@ -11,4 +11,10 @@ public class Config {
 
     public static final String SHARE_KEY_BIGFILE_SIZE = "bigfile_size";
 
+    public static final String SHARE_KEY_IGNORE_UPDATE = "ignore_update";
+
+    public static final String SHARE_KEY_IGNORE_UPDATE_VERSION = "ignore_update_version";
+
+    public static final String INTENT_KEY_VERSION = "version";
+
 }

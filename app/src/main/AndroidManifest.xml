@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wells.filemanager"
-    android:versionName="1.2"
-    android:versionCode="3">
+    android:versionName="2.1"
+    android:versionCode="2">
 
 
     <!--允许联网 -->
@@ -60,6 +60,11 @@
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <activity android:name=".activity.UpdateActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
         <!-- Update Activitys End -->

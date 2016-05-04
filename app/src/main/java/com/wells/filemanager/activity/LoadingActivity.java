@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.wells.filemanager.R;
+import com.wells.filemanager.util.UpdateAgent;
 
-import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 
 /**
@@ -25,9 +25,14 @@ public class LoadingActivity extends TActivity {
 
     private void initData() {
 
+//        UpdateAgent.initAppVersion(this);
+        UpdateAgent.update(this);
+
+
+
 //        BmobUpdateAgent.initAppVersion(this);
-        BmobUpdateAgent.setUpdateOnlyWifi(false);
-        BmobUpdateAgent.update(this);
+//        BmobUpdateAgent.setUpdateOnlyWifi(false);
+//        BmobUpdateAgent.update(this);
 //        BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
 //
 //            @Override

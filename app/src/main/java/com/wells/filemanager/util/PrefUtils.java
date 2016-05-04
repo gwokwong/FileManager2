@@ -38,4 +38,12 @@ public class PrefUtils {
         return shared.getInt(key, DEFAULT_INT_VALUE);
     }
 
+    public static void putBoolValue(String key, boolean value) {
+        shared.edit().putBoolean(key, value).apply();
+    }
+
+    public static boolean getBoolValue(String key) {
+        return shared.getBoolean(key, false);
+    }
+
 }
