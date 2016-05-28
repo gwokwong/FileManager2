@@ -36,7 +36,7 @@ public class SettingActivity extends TActivity {
                 }
 
                 int sizeValue = Integer.valueOf(size);
-                if(sizeValue<1){
+                if(sizeValue<5){
                     Snackbar(getString(R.string.default_size_not_small));
                     return;
                 }
