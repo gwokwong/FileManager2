@@ -14,6 +14,7 @@ import com.wells.filemanager.R;
 import com.wells.filemanager.bean.Feedback;
 import com.wells.filemanager.widget.ProgressWheelDialog;
 
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -62,26 +63,25 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
         Feedback feedback = new Feedback();
         feedback.setTitle(titleEt.getText().toString());
         feedback.setMsg(suggestionEt.getText().toString());
-        feedback.save(FeedbackActivity.this, new SaveListener() {
+        feedback.save(new SaveListener<String>() {
+
             @Override
             public void onStart() {
                 super.onStart();
                 loadingDialog.show();
             }
 
-
             @Override
-            public void onSuccess() {
-                titleEt.setText("");
-                suggestionEt.setText("");
-                Snackbar(getString(R.string.thanks_submit_close));
-                mHandler.sendEmptyMessageDelayed(0, 1700);
-            }
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    titleEt.setText("");
+                    suggestionEt.setText("");
+                    Snackbar(getString(R.string.thanks_submit_close));
+                    mHandler.sendEmptyMessageDelayed(0, 1700);
+                } else {
+                    Snackbar(getString(R.string.submit_failure));
+                }
 
-
-            @Override
-            public void onFailure(int i, String s) {
-                Snackbar(getString(R.string.submit_failure));
             }
 
             @Override
@@ -90,6 +90,34 @@ public class FeedbackActivity extends TActivity implements View.OnClickListener 
                 loadingDialog.dismiss();
             }
         });
+//        feedback.save(FeedbackActivity.this, new SaveListener() {
+//            @Override
+//            public void onStart() {
+//                super.onStart();
+//                loadingDialog.show();
+//            }
+//
+//
+//            @Override
+//            public void onSuccess() {
+//                titleEt.setText("");
+//                suggestionEt.setText("");
+//                Snackbar(getString(R.string.thanks_submit_close));
+//                mHandler.sendEmptyMessageDelayed(0, 1700);
+//            }
+//
+//
+//            @Override
+//            public void onFailure(int i, String s) {
+//                Snackbar(getString(R.string.submit_failure));
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                super.onFinish();
+//                loadingDialog.dismiss();
+//            }
+//        });
 
     }
 

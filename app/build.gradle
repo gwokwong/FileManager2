@@ -23,10 +23,22 @@ android {
     lintOptions{
         abortOnError false
     }
+
+    //删除META-INF信息
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/maven/com.squareup.okhttp3/okhttp/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okhttp3/okhttp/pom.properties'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+        exclude 'META-INF/maven/com.google.code.gson/gson/pom.xml'
+        exclude 'META-INF/maven/com.google.code.gson/gson/pom.properties'
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+//    compile 'cn.bmob.android:bmob-sdk:3.5.0'
     testCompile 'junit:junit:4.12'
 
 
@@ -38,7 +50,7 @@ dependencies {
     //以下SDK开发者请根据需要自行选择
     //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
     //3.5.5：请务必查看下面注释[1]
-    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+
 
     //bmob-push：Bmob的推送包
 //    compile 'cn.bmob.android:bmob-push:0.8'
@@ -54,8 +66,11 @@ dependencies {
     compile 'cn.bmob.android:http-legacy:1.0'
 
 
-    compile 'com.alipay.euler:andfix:0.4.0@aar+'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:design:25.4.0'
+    compile(name:'bmob-sdk-3.5.6', ext:'aar')
+
+    //compile 'cn.bmob.android:bmob-sdk:3.5.6'
+    compile 'com.alipay.euler:andfix:0.5.0@aar'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:design:25.0.1'
 }

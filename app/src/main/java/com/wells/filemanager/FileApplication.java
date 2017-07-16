@@ -10,12 +10,12 @@ import com.alipay.euler.andfix.patch.PatchManager;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.bmob.v3.Bmob;
 
 /**
  * Created by wells on 16/4/23.
  */
+
 public class FileApplication extends Application {
 
     public static FileApplication instance;
