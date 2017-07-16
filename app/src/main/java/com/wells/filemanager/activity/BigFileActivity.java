@@ -226,13 +226,23 @@ public class BigFileActivity extends TActivity {
     }
 
     private void showConfirmDialog(DialogInterface.OnClickListener listener) {
-        new AlertDialog.Builder(this).setTitle(getString(R.string.tips)).setMessage(getString(R.string.confirm_delete_or_not)).setPositiveButton(getString(R.string.confirm), listener).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//        new AlertDialog.Builder(this).setTitle(getString(R.string.tips)).setMessage(getString(R.string.confirm_delete_or_not)).setPositiveButton(getString(R.string.confirm), listener).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                dialogInterface.dismiss();
+//            }
+//        }).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        builder.setTitle(getString(R.string.tips));
+        builder.setMessage(getString(R.string.confirm_delete_or_not));
+        builder.setPositiveButton(getString(R.string.confirm), listener);
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
-        }).show();
-
+        });
+        builder.show();
     }
 
 }

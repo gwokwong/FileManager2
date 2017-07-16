@@ -14,9 +14,18 @@
         <!-- unused overflow展开的样式 -->
 
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
-
+        <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
 
 </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#FFC107</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Used for the background -->
+        <item name="android:background">#4CAF50</item>
+    </style>
 
     <style name="body_text">
         <item name="android:textColor">@color/black</item>
@@ -41,5 +50,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+
 
 </resources>
