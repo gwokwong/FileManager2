@@ -117,7 +117,7 @@ public class TActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    protected void Snackbar(String msg) {
+    protected  void Snackbar(String msg) {
         View coordView = findViewById(R.id.common_coordinator);
         CoordinatorLayout container = (CoordinatorLayout) coordView.findViewById(R.id.container);
         if (coordView != null && container != null) {

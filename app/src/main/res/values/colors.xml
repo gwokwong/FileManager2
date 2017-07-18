@@ -14,4 +14,6 @@
 
     <color name="text_pressed">#B0B0B0</color>
 
+    <color name="dialog_txt">#0E0E0E</color>
+
 </resources>

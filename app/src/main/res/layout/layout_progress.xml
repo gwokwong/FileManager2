@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/loading"
-            android:textColor="@color/black"
+            android:textColor="@color/dialog_txt"
             android:textSize="14sp" />
     </LinearLayout>
 

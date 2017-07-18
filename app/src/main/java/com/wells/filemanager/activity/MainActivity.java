@@ -12,6 +12,7 @@ import com.wells.filemanager.util.FileUtils;
 import com.wells.filemanager.widget.ProgressWheelDialog;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by wells on 16/4/21.
@@ -85,5 +86,29 @@ public class MainActivity extends TActivity {
             super.handleMessage(msg);
         }
     };
+
+//    private static class InnerHandler extends Handler {
+//
+//        private final WeakReference<MainActivity> mActivity;
+//
+//        public InnerHandler(MainActivity activity) {
+//            mActivity = new WeakReference<MainActivity>(activity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            MainActivity activity = mActivity.get();
+//            if (activity != null) {
+//                switch (msg.what) {
+//                    case DELETE_DIR:
+//                        executeDialog.dismiss();
+//                        Snackbar(getString(R.string.delete_success));
+//                        break;
+//                }
+//            }
+//        }
+//    }
+
+
 
 }

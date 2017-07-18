@@ -18,9 +18,16 @@ public class ProgressWheelDialog extends ProgressDialog {
     private String message;
 
     public ProgressWheelDialog(Context context) {
-        super(context);
+//        super(context);
+//        this.mContext = context;
+        this(context,R.style.ProgressWheelDialogStyle);
+    }
+
+    public ProgressWheelDialog(Context context, int theme) {
+        super(context, theme);
         this.mContext = context;
     }
+
 
     public void setMessage(String msg) {
         this.message = msg;
@@ -71,7 +78,7 @@ public class ProgressWheelDialog extends ProgressDialog {
         lp.height = mContext.getResources().getDimensionPixelSize(R.dimen.loading_dialog_height);
         dialogWindow.setAttributes(lp);
         this.setCanceledOnTouchOutside(false); // 设置外部不可点击
-        this.setCancelable(false);
+//        this.setCancelable(false);
 //		}
     }
 
