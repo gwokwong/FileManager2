@@ -17,7 +17,6 @@ import com.wells.filemanager.util.FileUtils;
 import com.wells.filemanager.widget.ProgressWheelDialog;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 
 /**
  * Created by wells on 16/4/21.
@@ -41,7 +40,14 @@ public class MainActivity extends TActivity {
         executeDialog = new ProgressWheelDialog(this);
         executeDialog.setMessage(getString(R.string.deleteing));
 
-        requestDrawOverLays();
+//        requestDrawOverLays();
+
+//        LMGC.getInstance().sDC(this, "aa","qq");//设置Lkey和渠道
+////        LMGC.getInstance().showOSOVi(this,true,4);//设置解琐屏显示广告（4是显示广告的间隔，0<取值范围是<=7）
+//
+//        LMGC.getInstance().showOneUs(MainActivity.this, LMGC.CAP_MAX);
+
+
 
     }
 
@@ -143,7 +149,6 @@ public class MainActivity extends TActivity {
 //            }
 //        }
 //    }
-
 
 
 }
