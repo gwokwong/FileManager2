@@ -37,8 +37,6 @@ public class LoadingActivity extends TActivity {
     private void initData() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-
             //授权
             helper = PermissionManager.with(LoadingActivity.this)
                     //添加权限请求码
